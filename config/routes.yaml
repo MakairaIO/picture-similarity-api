@@ -1,0 +1,3 @@
+similar_products_show:
+  path:     /api/{shop}/{product_id}
+  controller: App\Controller\PictureSimilarityController::find
