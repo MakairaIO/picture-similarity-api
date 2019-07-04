@@ -2,8 +2,9 @@
 
 Microservice to provide similar product ids for given product via API. Data is created by MachineLearning process in https://gitlab.marmalade.de/makaira/picture_similarity
 
-## Local Setup
+## Local Dev Setup
 
+0. Copy `.env.local.example` to `.env.local`
 1. `composer install`
 2. Setup DB and set `DATABASE_URL` (see example in .env)
 3. Migrate DB with `bin/console doctrine:migrations:migrate`
