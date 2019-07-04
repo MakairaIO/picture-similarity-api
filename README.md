@@ -2,6 +2,14 @@
 
 Microservice to provide similar product ids for given product via API. Data is created by MachineLearning process in https://gitlab.marmalade.de/makaira/picture_similarity
 
+- URL: `<SERVER>/api/<SHOP_ID>/<PRODUCT_ID>`
+- returns JSON-Array of similar IDs
+
+- Protected by BasicAuth
+- API User: `makaira`
+- API Password: `test` (development) or defined in ENV `API_PASSWORD`
+
+
 ## Local Dev Setup
 
 0. Copy `.env.local.example` to `.env.local`
@@ -18,11 +26,3 @@ Microservice to provide similar product ids for given product via API. Data is c
 4. Set `API_PASSWORD='<GENERATEDPW>'` generated with `bin/console security:encode-password`
 4. `composer install`
 3. Migrate DB with `bin/console doctrine:migrations:migrate`
-
-## Endpoint for similar products
-
-- Protected by BasicAuth
-- URL: `<SERVER>/api/<SHOP_ID>/<PRODUCT_ID>`
-- returns JSON-Array of similar IDs
-- API User: `makaira`
-- API Password: `test` (development) or defined in ENV `API_PASSWORD`
