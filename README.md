@@ -15,11 +15,14 @@ Microservice to provide similar product ids for given product via API. Data is c
 1. Set `DATABASE_URL` in environment
 2. Set random `APP_SECRET` in environment
 3. Set `APP_ENV=production` in environment
+4. Set `API_PASSWORD='<GENERATEDPW>'` generated with `bin/console security:encode-password`
 4. `composer install`
 3. Migrate DB with `bin/console doctrine:migrations:migrate`
 
 ## Endpoint for similar products
 
 - Protected by BasicAuth
-- URL: <SERVER>/api/<SHOP_ID>/<PRODUCT_ID>
+- URL: `<SERVER>/api/<SHOP_ID>/<PRODUCT_ID>`
 - returns JSON-Array of similar IDs
+- API User: `makaira`
+- API Password: `test` (development) or defined in ENV `API_PASSWORD`
