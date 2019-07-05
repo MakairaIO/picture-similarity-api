@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Routing\Annotation\Route;
 
 use App\Entity\PictureSimilarity;
 
@@ -16,6 +17,7 @@ class PictureSimilarityController extends AbstractController
      * Find similar products by shop and product_id
      *
      * @return JsonResponse
+     * @Route("/api/{shop}/{product_id}", name="find_similar_products", methods={"GET"})
      */
     public function find($shop, $product_id)
     {
