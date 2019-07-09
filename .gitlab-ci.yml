@@ -1,0 +1,63 @@
+stages:
+  - build
+  - deploy
+  - cleanup
+
+before_script:
+  - export TARGET_ENV="stage"
+  - test "$CI_COMMIT_REF_NAME" = "stable" && export TARGET_ENV="live"
+  - export TARGET_DOMAIN="picture-similarity.makaira.cloud"
+  - test "$TARGET_ENV" = "live" && export TARGET_DOMAIN="picture-similarity.makaira.io"
+  - export RELEASE_PACKAGE_PATH=$HOME/packages/releases/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME/$TARGET_DOMAIN
+  - test ! -d $RELEASE_PACKAGE_PATH && mkdir -p $RELEASE_PACKAGE_PATH
+
+variables:
+  KEEP_RELEASES: '5'
+
+build_stage_tar:
+  stage: build
+  only:
+    - stage
+  script:
+    - "# Install dependencies"
+    - composer install --no-dev -no --ignore-platform-reqs
+
+    - "# Remove some files that are not necessary"
+    - rm -f .gitlab-ci.yml
+
+    - "# Build deploy package"
+    - echo "Creating package ${RELEASE_PACKAGE_PATH}/release-${CI_COMMIT_SHA}.tar.gz"
+    - tar -czf $RELEASE_PACKAGE_PATH/release-$CI_COMMIT_SHA.tar.gz --exclude-vcs .
+
+build_stable_tar:
+  stage: build
+  only:
+    - stable
+  script:
+    - "# Install dependencies"
+    - composer install --no-dev -no --ignore-platform-reqs
+
+    - "# Remove some files that are not necessary"
+    - rm -f .gitlab-ci.yml
+
+    - "# Build deploy package"
+    - echo "Creating package ${RELEASE_PACKAGE_PATH}/release-${CI_COMMIT_SHA}.tar.gz"
+    - tar -czf $RELEASE_PACKAGE_PATH/release-$CI_COMMIT_SHA.tar.gz --exclude-vcs .
+
+deploy:
+  stage: deploy
+  only:
+    - stage
+    - stable
+  script:
+    - curl -s --data-urlencode "argString=-commit $CI_COMMIT_SHA -environment $TARGET_DOMAIN" "$RUNDECK_URL/api/14/job/$RUNDECK_JOB_ID_DEPLOY/run?authtoken=$RUNDECK_AUTH_TOKEN"
+
+cleanup:
+  stage: cleanup
+  only:
+    - stage
+    - stable
+  when: always
+  script:
+    - cd $RELEASE_PACKAGE_PATH
+    - bash -c 'i=0; for PACKAGEFILE in $(ls -1dt release-*); do [ -L $PACKAGEFILE ] && continue; ((i++)); if [ $i -gt $KEEP_RELEASES ]; then rm -rf $PACKAGEFILE; fi; done'
