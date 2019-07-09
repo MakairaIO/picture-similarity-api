@@ -6,6 +6,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "ext-json": "*",
+        "doctrine/doctrine-fixtures-bundle": "^3.2",
         "jms/serializer-bundle": "^2.4",
         "sensio/framework-extra-bundle": "^5.3",
         "symfony/console": "4.3.*",
@@ -20,7 +21,6 @@
         "symfony/yaml": "4.3.*"
     },
     "require-dev": {
-        "doctrine/doctrine-fixtures-bundle": "^3.0",
         "symfony/maker-bundle": "^1.10"
     },
     "config": {
