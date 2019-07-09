@@ -20,9 +20,21 @@ Microservice to provide similar product ids for given product via API. Data is c
 
 ## Production Setup
 
-1. Set `DATABASE_URL` in environment
-2. Set random `APP_SECRET` in environment
-3. Set `APP_ENV=production` in environment
-4. Set `API_PASSWORD='<GENERATEDPW>'` generated with `bin/console security:encode-password`
-4. `composer install`
+0. Setup Server with ansible (see directory ansible)
+1. Set environment in apache (`/etc/apache2/sites-available`)
+```
+SetEnv DATABASE_URL "mysql://YOUR_DB_STRING"
+SetEnv APP_ENV "prod"
+SetEnv APP_SECRET "THESECRET"
+SetEnv API_PASSWORD "THEPASSWORD" #generated with `bin/console security:encode-password`
+```
+2. Set env variable for CLI (/etc/environment)
+```
+DATABASE_URL="mysql://YOUR_DB_STRING"
+APP_ENV="prod"
+APP_SECRET="THESECRET"
+API_PASSWORD="THEPASSWORD" #generated with `bin/console security:encode-password`
+```
+2. Upload release to server (e.g. with rundeck)
 3. Migrate DB with `bin/console doctrine:migrations:migrate`
+3. Import Pingdom Healthcheck Fixtures with `bin/console doctrine:fixtures:load`
