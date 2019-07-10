@@ -4,38 +4,34 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Index;
-use JsonSerializable;
-use Symfony\Component\Validator\Constraints as Assert;
+
+use JSONSerializable;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="picture_similarity",indexes={@Index(name="search_idx", columns={"product_id", "shop"})})
  */
-class PictureSimilarity implements JsonSerializable
+class PictureSimilarity implements JSONSerializable
 {
     /**
-     * @ORM\Id
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=100, name="product_id")
-     * @Assert\NotBlank()
+     * @ORM\Column(type="string", length=255, name="product_id")
      */
     private $productId;
 
     /**
      * @ORM\Column(type="json", name="similar_ids")
-     * @Assert\NotBlank()
-     *
      */
-    private $similarIds;
+    private $similarIds = [];
 
     /**
-     * @ORM\Column(type="string", length=100)
-     * @Assert\NotBlank()
+     * @ORM\Column(type="string", length=255)
      */
     private $shop;
 
@@ -44,91 +40,61 @@ class PictureSimilarity implements JsonSerializable
      */
     private $updatedAt;
 
-
-    /**
-     * @return mixed
-     */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * @param mixed $id
-     */
-    public function setId($id): void
-    {
-        $this->id = $id;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getProductId()
+    public function getProductId(): ?string
     {
         return $this->productId;
     }
 
-    /**
-     * @param mixed $productId
-     */
-    public function setProductId($productId): void
+    public function setProductId(string $productId): self
     {
         $this->productId = $productId;
+
+        return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getSimilarIds()
+    public function getSimilarIds(): ?array
     {
         return $this->similarIds;
     }
 
-    /**
-     * @param mixed $similarIds
-     */
-    public function setSimilarIds($similarIds): void
+    public function setSimilarIds(array $similarIds): self
     {
         $this->similarIds = $similarIds;
+
+        return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getShop()
+    public function getShop(): ?string
     {
         return $this->shop;
     }
 
-    /**
-     * @param mixed $shop
-     */
-    public function setShop($shop): void
+    public function setShop(string $shop): self
     {
         $this->shop = $shop;
+
+        return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getUpdatedAt()
+    public function getUpdatedAt(): ?\DateTimeInterface
     {
         return $this->updatedAt;
     }
 
-    /**
-     * @param mixed $updatedAt
-     */
-    public function setUpdatedAt($updatedAt): void
+    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
     }
 
     public function jsonSerialize()
     {
         return $this->getSimilarIds();
     }
-
-
 }

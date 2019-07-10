@@ -1,34 +1,25 @@
 <?php
-
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Routing\Annotation\Route;
-
 use App\Entity\PictureSimilarity;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 
-/**
- * PictureSimilarity controller
- */
-class PictureSimilarityController extends AbstractController
+class PictureSimilarityController extends Controller
 {
     /**
-     * Find similar products by shop and product_id
+     * Find similar products by shop and productId
      *
-     * @return JsonResponse
-     * @Route("/api/{shop}/{product_id}", name="find_similar_products", methods={"GET"})
+     * @return Response
      */
-    public function find($shop, $product_id)
+    public function find($shop, $productId)
     {
         $repository = $this->getDoctrine()->getRepository(PictureSimilarity::class);
-        $similar = $repository->findBy(['productId' => $product_id, 'shop' => $shop], ['updatedAt' => 'DESC']);
-
-        if (empty($similar)) {
-            return new JsonResponse('', JsonResponse::HTTP_NOT_FOUND);
+        $similar = $repository->findBy(['productId' => $productId, 'shop' => $shop], ['updatedAt' => 'DESC']);
+        if (!$similar) {
+            throw $this->createNotFoundException('No Similary Products found.');
         }
 
-        return new JsonResponse($similar[0]);
+        return $this->json($similar[0]);
     }
-
 }
