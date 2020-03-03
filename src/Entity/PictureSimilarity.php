@@ -9,7 +9,7 @@ use JSONSerializable;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="picture_similarity",indexes={@Index(name="search_idx", columns={"product_id", "shop"})})
+ * @ORM\Table(name="picture_similarity",indexes={@Index(name="search_idx", columns={"product_id", "shop", "type"})})
  */
 class PictureSimilarity implements JSONSerializable
 {
@@ -39,6 +39,11 @@ class PictureSimilarity implements JSONSerializable
      * @ORM\Column(type="datetime", name="updated_at")
      */
     private $updatedAt;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $type;
 
     public function getId(): ?int
     {
@@ -96,5 +101,21 @@ class PictureSimilarity implements JSONSerializable
     public function jsonSerialize()
     {
         return $this->getSimilarIds();
+    }
+
+    /**
+     * @return string
+     */
+    public function getType(): string
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param string $type
+     */
+    public function setType($type): void
+    {
+        $this->type = $type;
     }
 }
