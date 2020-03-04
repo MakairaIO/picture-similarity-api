@@ -1,3 +1,7 @@
 api:
     path: /api/{shop}/{productId}
     controller: App\Controller\PictureSimilarityController:find
+
+type:
+    path: /api/{type}/{shop}/{productId}
+    controller: App\Controller\PictureSimilarityController:find
