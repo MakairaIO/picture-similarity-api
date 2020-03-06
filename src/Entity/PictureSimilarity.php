@@ -111,11 +111,10 @@ class PictureSimilarity implements JSONSerializable
         return $this->type;
     }
 
-    /**
-     * @param string $type
-     */
-    public function setType($type): void
+    public function setType($type): self
     {
         $this->type = $type;
+
+        return $this;
     }
 }

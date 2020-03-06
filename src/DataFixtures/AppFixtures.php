@@ -14,6 +14,7 @@ class AppFixtures extends Fixture
         $pictureSimPingDom->setProductId('testproduct');
         $pictureSimPingDom->setSimilarIds(['its', 'the', 'pingdom', 'test']);
         $pictureSimPingDom->setShop('testshop');
+        $pictureSimPingDom->setType('image');
         $pictureSimPingDom->setUpdatedAt(new \DateTime('2999-01-01 00:00:00'));
 
         $manager->persist($pictureSimPingDom);

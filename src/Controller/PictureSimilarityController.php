@@ -12,8 +12,10 @@ class PictureSimilarityController extends Controller
      *
      * @return Response
      */
-    public function find($type = 'image', $shop, $productId)
+    public function find($shop, $productId, $type = 'image')
     {
+        $type = $type === 'image' ? array('image', '') : $type;
+
         $repository = $this->getDoctrine()->getRepository(PictureSimilarity::class);
         $similar = $repository->findBy(['productId' => $productId, 'shop' => $shop, 'type' => $type], ['updatedAt' => 'DESC']);
         if (!$similar) {
