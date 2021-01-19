@@ -93,6 +93,9 @@
     "doctrine/reflection": {
         "version": "v1.0.0"
     },
+    "doctrine/sql-formatter": {
+        "version": "1.1.1"
+    },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
     },
@@ -126,6 +129,9 @@
             "public/.htaccess"
         ]
     },
+    "symfony/browser-kit": {
+        "version": "v4.3.11"
+    },
     "symfony/cache": {
         "version": "v4.3.2"
     },
@@ -154,8 +160,14 @@
     "symfony/dependency-injection": {
         "version": "v4.3.2"
     },
+    "symfony/deprecation-contracts": {
+        "version": "v2.2.0"
+    },
     "symfony/doctrine-bridge": {
         "version": "v4.3.2"
+    },
+    "symfony/dom-crawler": {
+        "version": "v4.3.11"
     },
     "symfony/dotenv": {
         "version": "v4.3.2"
@@ -224,8 +236,26 @@
     "symfony/orm-pack": {
         "version": "v1.0.6"
     },
+    "symfony/phpunit-bridge": {
+        "version": "5.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "5.1",
+            "ref": "cb82a2355ec62fef0e7028ac969fe86fa722feb8"
+        },
+        "files": [
+            ".env.test",
+            "bin/phpunit",
+            "phpunit.xml.dist",
+            "tests/bootstrap.php"
+        ]
+    },
     "symfony/polyfill-intl-idn": {
         "version": "v1.11.0"
+    },
+    "symfony/polyfill-intl-normalizer": {
+        "version": "v1.22.0"
     },
     "symfony/polyfill-mbstring": {
         "version": "v1.11.0"
