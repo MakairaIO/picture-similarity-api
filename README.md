@@ -12,6 +12,13 @@ Microservice to provide similar product ids for given product via API. Data is c
 - API User: `makaira`
 - API Password: `test` (development) or defined in ENV `API_PASSWORD`
 
+#Note about githooks that will be run before committing code
+I added a package named grumphp, this package will help us to add some pre-commit githooks so that we can maintain our code quality(more detail about the package: https://github.com/phpro/grumphp). <br>
+These 2 following code validations need to be bypassed in order to commit code:
+- The Phpunit Bridge task will run your unit tests thanks to the Symfony Phpunit Bridge.<br>
+  More detail: https://github.com/phpro/grumphp/blob/master/doc/tasks/phpunitbridge.md
+- The PHPLint task will check your source files for syntax errors.<br>
+  More detail: https://github.com/phpro/grumphp/blob/master/doc/tasks/phplint.md
 
 ## Local Dev Setup
 
