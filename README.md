@@ -2,9 +2,12 @@
 
 Microservice to provide similar product ids for given product via API. Data is created by MachineLearning process in https://gitlab.marmalade.de/makaira/picture_similarity
 
-- URL: `<SERVER>/api/<SHOP_ID>/<PRODUCT_ID>`
-- returns JSON-Array of similar IDs
-
+- API get Reco by a PRODUCT_ID: `<SERVER>/api/<TYPE>/<SHOP_ID>/<PRODUCT_ID>` <br>
+  This api returns an JSON-Array of similar IDs. <br>
+  Please note that <TYPE> is optional.
+- API get Reco by multiple PRODUCT_IDs: `<SERVER>/api/<TYPE>/<SHOP_ID>/products/<PRODUCT_IDs>` <br>
+  This api returns an array contains JSON-Arrays of similar IDs. <br>
+  Please note that <TYPE> is optional and <PRODUCT_IDs> is a string contains product ids separated by ',' Ex: 1,2,3.
 - Protected by BasicAuth
 - API User: `makaira`
 - API Password: `test` (development) or defined in ENV `API_PASSWORD`
