@@ -16,6 +16,8 @@
         "symfony/yaml": "4.3.*"
     },
     "require-dev": {
+        "php-parallel-lint/php-parallel-lint": "^1.2",
+        "phpro/grumphp-shim": "^1.3",
         "symfony/maker-bundle": "^1.12",
         "symfony/phpunit-bridge": "^5.2"
     },

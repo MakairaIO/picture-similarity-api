@@ -21,7 +21,11 @@ class PictureSimilarityController extends AbstractController
         $type = $type === 'image' ? array('image', '') : $type;
 
         $repository = $this->getDoctrine()->getRepository(PictureSimilarity::class);
-        $similar = $repository->findBy(['productId' => $productId, 'shop' => $shop, 'type' => $type], ['updatedAt' => 'DESC']);
+        $similar = $repository->findBy([
+            'productId' => $productId,
+            'shop' => $shop,
+            'type' => $type
+        ], ['updatedAt' => 'DESC']);
         if (!$similar) {
             throw $this->createNotFoundException('No Similar Products found.');
         }
@@ -43,7 +47,11 @@ class PictureSimilarityController extends AbstractController
         $productIds = explode(',', $productIds);
 
         $repository = $this->getDoctrine()->getRepository(PictureSimilarity::class);
-        $similar = $repository->findBy(['productId' => $productIds, 'shop' => $shop, 'type' => $type], ['updatedAt' => 'DESC']);
+        $similar = $repository->findBy([
+            'productId' => $productIds,
+            'shop' => $shop,
+            'type' => $type
+        ], ['updatedAt' => 'DESC']);
         if (!$similar) {
             throw $this->createNotFoundException('No Similar Products found.');
         }
