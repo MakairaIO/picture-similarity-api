@@ -10,14 +10,23 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        $pictureSimPingDom = new PictureSimilarity();
-        $pictureSimPingDom->setProductId('testproduct');
-        $pictureSimPingDom->setSimilarIds(['its', 'the', 'pingdom', 'test']);
-        $pictureSimPingDom->setShop('testshop');
-        $pictureSimPingDom->setType('image');
-        $pictureSimPingDom->setUpdatedAt(new \DateTime('2999-01-01 00:00:00'));
+        for ($i = 1; $i <= 5; $i++) {
+            $imageTypeProduct = new PictureSimilarity();
+            $imageTypeProduct->setProductId($i);
+            $imageTypeProduct->setSimilarIds(['image', 'type', 'product', $i]);
+            $imageTypeProduct->setShop('testshop');
+            $imageTypeProduct->setType('image');
+            $imageTypeProduct->setUpdatedAt(new \DateTime('2999-01-01 00:00:00'));
+            $manager->persist($imageTypeProduct);
 
-        $manager->persist($pictureSimPingDom);
+            $notImageTypeProduct = new PictureSimilarity();
+            $notImageTypeProduct->setProductId($i);
+            $notImageTypeProduct->setSimilarIds(['notImage', 'type', 'product', $i]);
+            $notImageTypeProduct->setShop('testshop');
+            $notImageTypeProduct->setType('notImage');
+            $notImageTypeProduct->setUpdatedAt(new \DateTime('2999-01-01 00:00:00'));
+            $manager->persist($notImageTypeProduct);
+        }
 
         $manager->flush();
     }

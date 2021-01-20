@@ -2,13 +2,23 @@
 
 Microservice to provide similar product ids for given product via API. Data is created by MachineLearning process in https://gitlab.marmalade.de/makaira/picture_similarity
 
-- URL: `<SERVER>/api/<SHOP_ID>/<PRODUCT_ID>`
-- returns JSON-Array of similar IDs
-
+- API get Reco by a PRODUCT_ID: `<SERVER>/api/<TYPE>/<SHOP_ID>/<PRODUCT_ID>` <br>
+  This api returns an JSON-Array of similar IDs. <br>
+  Please note that <TYPE> is optional.
+- API get Reco by multiple PRODUCT_IDs: `<SERVER>/api/<TYPE>/<SHOP_ID>/products/<PRODUCT_IDs>` <br>
+  This api returns an array contains JSON-Arrays of similar IDs. <br>
+  Please note that <TYPE> is optional and <PRODUCT_IDs> is a string contains product ids separated by ',' Ex: 1,2,3.
 - Protected by BasicAuth
 - API User: `makaira`
 - API Password: `test` (development) or defined in ENV `API_PASSWORD`
 
+#Note about githooks that will be run before committing code
+I added a package named grumphp, this package will help us to add some pre-commit githooks so that we can maintain our code quality(more detail about the package: https://github.com/phpro/grumphp). <br>
+These 2 following code validations need to be bypassed in order to commit code:
+- The Phpunit Bridge task will run your unit tests thanks to the Symfony Phpunit Bridge.<br>
+  More detail: https://github.com/phpro/grumphp/blob/master/doc/tasks/phpunitbridge.md
+- The PHPLint task will check your source files for syntax errors.<br>
+  More detail: https://github.com/phpro/grumphp/blob/master/doc/tasks/phplint.md
 
 ## Local Dev Setup
 
