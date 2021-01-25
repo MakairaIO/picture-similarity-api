@@ -43,19 +43,52 @@ class PictureSimilarityController extends AbstractController
      */
     public function findByProductIds($shop, $productIds, $type = 'image'): Response
     {
-        $type = $type === 'image' ? array('image', '') : $type;
-        $productIds = explode(',', $productIds);
-
-        $repository = $this->getDoctrine()->getRepository(PictureSimilarity::class);
-        $similar = $repository->findBy([
-            'productId' => $productIds,
+        $bindParameters = [
             'shop' => $shop,
-            'type' => $type
-        ], ['updatedAt' => 'DESC']);
-        if (!$similar) {
+        ];
+
+        // generate productId placeholders and parameters
+        $productIds = explode(',', $productIds);
+        $productIdParameterPlaceholders = [];
+        $i = 0;
+        foreach ($productIds as $productId) {
+            $i++;
+            $productIdParameterPlaceholders[] = ':productId' . $i;
+            $bindParameters['productId' . $i] = $productId;
+        }
+        $productIdParameterPlaceholders = implode(',', $productIdParameterPlaceholders);
+
+        // generate type placeholders and parameters
+        if ($type === 'image') {
+            $typeParameterPlaceholders = ':type1, :type2';
+            $bindParameters['type1'] = 'image';
+            $bindParameters['type2'] = '';
+        } else {
+            $typeParameterPlaceholders = ':type';
+            $bindParameters['type'] = $type;
+        }
+
+        // get data from DB
+        $conn = $this->getDoctrine()->getConnection();
+        $sql = "SELECT ps.similar_ids 
+            FROM picture_similarity AS ps 
+            JOIN (SELECT product_id, MAX(updated_at) updated_at FROM picture_similarity GROUP BY product_id) AS sps 
+                ON sps.product_id = ps.product_id AND sps.updated_at = ps.updated_at 
+            WHERE ps.product_id IN ({$productIdParameterPlaceholders}) 
+              AND ps.shop = :shop 
+              AND ps.type IN ({$typeParameterPlaceholders})";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute($bindParameters);
+        $similarProducts = $stmt->fetchAll(\PDO::FETCH_COLUMN);
+
+        if (!$similarProducts) {
             throw $this->createNotFoundException('No Similar Products found.');
         }
 
-        return $this->json($similar);
+        $result = [];
+        foreach ($similarProducts as $similarIds) {
+            $result[] = json_decode($similarIds);
+        }
+        return $this->json($result);
     }
 }
