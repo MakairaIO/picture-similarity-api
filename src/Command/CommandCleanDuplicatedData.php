@@ -2,6 +2,7 @@
 
 namespace App\Command;
 
+use App\Entity\PictureSimilarity;
 use Doctrine\DBAL\Driver\Exception;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
@@ -20,30 +21,28 @@ class CommandCleanDuplicatedData extends Command
         $this->entityManager = $entityManager;
     }
 
-
     protected function execute(InputInterface $input, OutputInterface $output): ?int
     {
         try {
             $conn = $this->entityManager->getConnection();
-            // Get latest products
-            $getLatestProductSql = "SELECT ps.id, ps.product_id, ps.shop, ps.type
-            FROM picture_similarity AS ps 
-            JOIN (SELECT product_id, shop, type, MAX(updated_at) updated_at FROM picture_similarity GROUP BY product_id, shop, type) AS sps
-            ON sps.updated_at = ps.updated_at
-                AND sps.product_id = ps.product_id
-                AND sps.shop = ps.shop
-                AND sps.type = ps.type
-            limit 0, 1000";
-            $queryResult = $conn->executeQuery($getLatestProductSql);
-            $latestProducts = $queryResult->fetchAllAssociative();
+            // Get the first 1000 duplicated products
+            $getDuplicatedProductSql = "SELECT product_id, COUNT(*) AS duplicate_count
+                FROM picture_similarity
+                GROUP BY product_id
+                HAVING duplicate_count > 1
+                LIMIT 0, 1000";
+            $duplicatedProducts = $conn->executeQuery($getDuplicatedProductSql)->fetchAllAssociative();
 
-            // Delete all products that have id != [latest id] and product_id = [latest product_id] and shop = [latest shop] and type = [latest type]
-            foreach ($latestProducts as $latestProduct) {
-                $deleteDuplicatedProductSQL = "DELETE FROM picture_similarity
-                WHERE id != {$latestProduct['id']}
-                    AND product_id = '{$latestProduct['product_id']}'
-                    AND shop = '{$latestProduct['shop']}'
-                    AND type = '{$latestProduct['type']}'";
+            // Delete all products that have id != [latest id] and product_id = [latest product_id]
+            $pictureSimilarityRepository = $this->entityManager->getRepository(PictureSimilarity::class);
+            foreach ($duplicatedProducts as $duplicatedProduct) {
+                $latestProduct = $pictureSimilarityRepository->findBy([
+                    'productId' => $duplicatedProduct['product_id'],
+                ], ['updatedAt' => 'DESC'], 1)[0];
+
+                $deleteDuplicatedProductSQL = "DELETE FROM picture_similarity 
+                        WHERE id != {$latestProduct->getId()} 
+                            AND product_id = '{$latestProduct->getProductId()}'";
                 $conn->executeQuery($deleteDuplicatedProductSQL);
             }
             $output->write('Command executed successfully!');

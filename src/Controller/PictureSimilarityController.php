@@ -43,55 +43,25 @@ class PictureSimilarityController extends AbstractController
      */
     public function findByProductIds($shop, $productIds, $type = 'image'): Response
     {
-        $bindParameters = [
-            'shop' => $shop,
-        ];
-
-        // generate productId placeholders and parameters
         $productIds = explode(',', $productIds);
-        $productIdParameterPlaceholders = [];
-        $i = 0;
+        $similarProducts = [];
+
+        $repository = $this->getDoctrine()->getRepository(PictureSimilarity::class);
         foreach ($productIds as $productId) {
-            $i++;
-            $productIdParameterPlaceholders[] = ':productId' . $i;
-            $bindParameters['productId' . $i] = $productId;
-        }
-        $productIdParameterPlaceholders = implode(',', $productIdParameterPlaceholders);
-
-        // generate type placeholders and parameters
-        if ($type === 'image') {
-            $typeParameterPlaceholders = ':type1, :type2';
-            $bindParameters['type1'] = 'image';
-            $bindParameters['type2'] = '';
-        } else {
-            $typeParameterPlaceholders = ':type';
-            $bindParameters['type'] = $type;
+            $similar = $repository->findBy([
+                'productId' => $productId,
+                'shop' => $shop,
+                'type' => $type
+            ], ['updatedAt' => 'DESC'], 1);
+            if (isset($similar[0])) {
+                $similarProducts[] = $similar[0];
+            }
         }
 
-        // get latest products from DB
-        $conn = $this->getDoctrine()->getConnection();
-        $sql = "SELECT ps.similar_ids 
-            FROM picture_similarity AS ps 
-            JOIN (SELECT product_id, shop, type, MAX(updated_at) updated_at FROM picture_similarity GROUP BY product_id, shop, type) AS sps 
-            ON sps.updated_at = ps.updated_at
-                AND sps.product_id = ps.product_id 
-                AND sps.shop = ps.shop 
-                AND sps.type = ps.type 
-            WHERE ps.product_id IN ({$productIdParameterPlaceholders}) 
-              AND ps.shop = :shop 
-              AND ps.type IN ({$typeParameterPlaceholders})";
-        $stmt = $conn->prepare($sql);
-        $stmt->execute($bindParameters);
-        $similarProducts = $stmt->fetchAll(\PDO::FETCH_COLUMN);
-
-        if (!$similarProducts) {
+        if (empty($similarProducts)) {
             throw $this->createNotFoundException('No Similar Products found.');
         }
 
-        $result = [];
-        foreach ($similarProducts as $similarIds) {
-            $result[] = json_decode($similarIds);
-        }
-        return $this->json($result);
+        return $this->json($similarProducts);
     }
 }
