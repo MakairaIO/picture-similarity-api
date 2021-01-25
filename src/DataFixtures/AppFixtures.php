@@ -26,6 +26,15 @@ class AppFixtures extends Fixture
             $notImageTypeProduct->setType('notImage');
             $notImageTypeProduct->setUpdatedAt(new \DateTime('2999-01-01 00:00:00'));
             $manager->persist($notImageTypeProduct);
+
+            // Create an older product (updated_at is older) for duplication testing
+            $duplicatedImageTypeProduct = new PictureSimilarity();
+            $duplicatedImageTypeProduct->setProductId($i);
+            $duplicatedImageTypeProduct->setSimilarIds(['older', 'image', 'type', 'product', $i]);
+            $duplicatedImageTypeProduct->setShop('testshop');
+            $duplicatedImageTypeProduct->setType('image');
+            $duplicatedImageTypeProduct->setUpdatedAt(new \DateTime('2998-01-01 00:00:00'));
+            $manager->persist($duplicatedImageTypeProduct);
         }
 
         $manager->flush();

@@ -68,12 +68,15 @@ class PictureSimilarityController extends AbstractController
             $bindParameters['type'] = $type;
         }
 
-        // get data from DB
+        // get latest products from DB
         $conn = $this->getDoctrine()->getConnection();
         $sql = "SELECT ps.similar_ids 
             FROM picture_similarity AS ps 
-            JOIN (SELECT product_id, MAX(updated_at) updated_at FROM picture_similarity GROUP BY product_id) AS sps 
-                ON sps.product_id = ps.product_id AND sps.updated_at = ps.updated_at 
+            JOIN (SELECT product_id, shop, type, MAX(updated_at) updated_at FROM picture_similarity GROUP BY product_id, shop, type) AS sps 
+            ON sps.updated_at = ps.updated_at
+                AND sps.product_id = ps.product_id 
+                AND sps.shop = ps.shop 
+                AND sps.type = ps.type 
             WHERE ps.product_id IN ({$productIdParameterPlaceholders}) 
               AND ps.shop = :shop 
               AND ps.type IN ({$typeParameterPlaceholders})";
