@@ -36,6 +36,7 @@ class CommandCleanDuplicatedData extends Command
             // Delete all products that have id != [latest id] and product_id = [latest product_id]
             $pictureSimilarityRepository = $this->entityManager->getRepository(PictureSimilarity::class);
             foreach ($duplicatedProducts as $duplicatedProduct) {
+                // Get the latest product of the duplicated product
                 $latestProduct = $pictureSimilarityRepository->findBy([
                     'productId' => $duplicatedProduct['product_id'],
                 ], ['updatedAt' => 'DESC'], 1)[0];
