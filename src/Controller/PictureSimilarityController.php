@@ -43,19 +43,25 @@ class PictureSimilarityController extends AbstractController
      */
     public function findByProductIds($shop, $productIds, $type = 'image'): Response
     {
-        $type = $type === 'image' ? array('image', '') : $type;
         $productIds = explode(',', $productIds);
+        $similarProducts = [];
 
         $repository = $this->getDoctrine()->getRepository(PictureSimilarity::class);
-        $similar = $repository->findBy([
-            'productId' => $productIds,
-            'shop' => $shop,
-            'type' => $type
-        ], ['updatedAt' => 'DESC']);
-        if (!$similar) {
+        foreach ($productIds as $productId) {
+            $similar = $repository->findBy([
+                'productId' => $productId,
+                'shop' => $shop,
+                'type' => $type
+            ], ['updatedAt' => 'DESC'], 1);
+            if (isset($similar[0])) {
+                $similarProducts[] = $similar[0];
+            }
+        }
+
+        if (empty($similarProducts)) {
             throw $this->createNotFoundException('No Similar Products found.');
         }
 
-        return $this->json($similar);
+        return $this->json($similarProducts);
     }
 }
