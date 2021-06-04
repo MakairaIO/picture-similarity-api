@@ -34,4 +34,3 @@ services:
       - traefik.frontend.passHostHeader=true
       - traefik.docker.network=${PROXY_NETWORK:-proxy}
     user: "${USER_UID:-www-data}:${USER_GID:-www-data}"
-    restart: on-failure
