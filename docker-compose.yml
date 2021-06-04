@@ -1,0 +1,37 @@
+version: '3.7'
+
+networks:
+  proxy:
+    external:
+      name: ${PROXY_NETWORK:-proxy}
+  mysql:
+    external:
+      name: ${MYSQL_NETWORK:-mysql}
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: docker/web/Dockerfile
+    env_file:
+      - ./docker/web/.web.env
+    volumes:
+      - './:/var/www/html'
+      - '/etc/passwd:/etc/passwd:ro'
+      - '/etc/group:/etc/group:ro'
+      - .:/var/www/development
+      - './docker/web/.htaccess:/var/www/html/public/.htaccess'
+    working_dir: '/var/www/html'
+    networks:
+      proxy:
+        aliases:
+          - picture.similarity.local
+      mysql:
+      default:
+    labels:
+      - traefik.port=80
+      - traefik.frontend.rule=Host:${HOST:-picture.similarity.local}
+      - traefik.frontend.passHostHeader=true
+      - traefik.docker.network=${PROXY_NETWORK:-proxy}
+    user: "${USER_UID:-www-data}:${USER_GID:-www-data}"
+    restart: on-failure
