@@ -1,6 +1,6 @@
 get_available_types:
     methods: GET
-    path: /api/{shop}/get-available-types
+    path: /api/{shop}/available-types
     controller: App\Controller\PictureSimilarityController:getAvailableTypes
 
 api:
