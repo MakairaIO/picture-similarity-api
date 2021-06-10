@@ -1,15 +1,24 @@
+get_available_types:
+    methods: GET
+    path: /api/{shop}/available-types
+    controller: App\Controller\PictureSimilarityController:getAvailableTypes
+
 api:
+    methods: GET
     path: /api/{shop}/{productId}
     controller: App\Controller\PictureSimilarityController:find
 
 api_multiple_product_ids:
+    methods: GET
     path: /api/{shop}/products/{productIds}
     controller: App\Controller\PictureSimilarityController:findByProductIds
 
 type:
+    methods: GET
     path: /api/{type}/{shop}/{productId}
     controller: App\Controller\PictureSimilarityController:find
 
 type_multiple_product_ids:
+    methods: GET
     path: /api/{type}/{shop}/products/{productIds}
     controller: App\Controller\PictureSimilarityController:findByProductIds

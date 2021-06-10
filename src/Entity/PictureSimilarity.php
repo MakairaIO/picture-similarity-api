@@ -10,6 +10,7 @@ use JSONSerializable;
 /**
  * @ORM\Entity
  * @ORM\Table(name="picture_similarity",indexes={@Index(name="search_idx", columns={"product_id", "shop", "type"})})
+ * @ORM\Entity(repositoryClass="App\Entity\PictureSimilarityRepository")
  */
 class PictureSimilarity implements JSONSerializable
 {

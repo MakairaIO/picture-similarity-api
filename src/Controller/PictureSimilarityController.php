@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\PictureSimilarity;
+use App\Entity\PictureSimilarityRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -16,7 +17,7 @@ class PictureSimilarityController extends AbstractController
      * @param string $type
      * @return Response
      */
-    public function find($shop, $productId, $type = 'image'): Response
+    public function find($shop, $productId, string $type = 'image'): Response
     {
         $type = $type === 'image' ? array('image', '') : $type;
 
@@ -41,7 +42,7 @@ class PictureSimilarityController extends AbstractController
      * @param string $type
      * @return Response
      */
-    public function findByProductIds($shop, $productIds, $type = 'image'): Response
+    public function findByProductIds($shop, $productIds, string $type = 'image'): Response
     {
         $productIds = explode(',', $productIds);
         $similarProducts = [];
@@ -63,5 +64,17 @@ class PictureSimilarityController extends AbstractController
         }
 
         return $this->json($similarProducts);
+    }
+
+    /**
+     * @param $shop
+     * @return Response
+     */
+    public function getAvailableTypes($shop): Response
+    {
+        /**@var PictureSimilarityRepository $repository*/
+        $repository = $this->getDoctrine()->getRepository(PictureSimilarity::class);
+
+        return $this->json($repository->getAvailableTypesByShop($shop));
     }
 }

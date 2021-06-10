@@ -56,4 +56,19 @@ class PictureSimilarityControllerTest extends WebTestCase
         ];
         $this->assertEquals($expectedResponse, $actualResponse);
     }
+
+    public function testGetAvailableTypes()
+    {
+        $client = static::createClient();
+
+        // Test without type
+        $client->request('GET', '/api/testshop/get-available-types');
+        $actualResponse = json_decode($client->getResponse()->getContent(), true);
+        $expectedResponse = [
+            'image',
+            'notImage',
+        ];
+
+        $this->assertEquals($expectedResponse, $actualResponse);
+    }
 }
