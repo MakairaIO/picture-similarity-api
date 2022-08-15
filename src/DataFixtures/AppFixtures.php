@@ -2,6 +2,7 @@
 
 namespace Makaira\PictureSimilarity\DataFixtures;
 
+use DateTimeImmutable;
 use Makaira\PictureSimilarity\Entity\PictureSimilarity;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -16,7 +17,7 @@ class AppFixtures extends Fixture
             $imageTypeProduct->setSimilarIds(['image', 'type', 'product', $i]);
             $imageTypeProduct->setShop('testshop');
             $imageTypeProduct->setType('image');
-            $imageTypeProduct->setUpdatedAt(new \DateTime('2999-01-01 00:00:00'));
+            $imageTypeProduct->setUpdatedAt(new DateTimeImmutable('2999-01-01 00:00:00'));
             $manager->persist($imageTypeProduct);
 
             $notImageTypeProduct = new PictureSimilarity();
@@ -24,7 +25,7 @@ class AppFixtures extends Fixture
             $notImageTypeProduct->setSimilarIds(['notImage', 'type', 'product', $i]);
             $notImageTypeProduct->setShop('testshop');
             $notImageTypeProduct->setType('notImage');
-            $notImageTypeProduct->setUpdatedAt(new \DateTime('2999-01-01 00:00:00'));
+            $notImageTypeProduct->setUpdatedAt(new DateTimeImmutable('2999-01-01 00:00:00'));
             $manager->persist($notImageTypeProduct);
 
             // Create an older product (updated_at is older) for duplication testing
@@ -33,7 +34,7 @@ class AppFixtures extends Fixture
             $duplicatedImageTypeProduct->setSimilarIds(['older', 'image', 'type', 'product', $i]);
             $duplicatedImageTypeProduct->setShop('testshop');
             $duplicatedImageTypeProduct->setType('image');
-            $duplicatedImageTypeProduct->setUpdatedAt(new \DateTime('2998-01-01 00:00:00'));
+            $duplicatedImageTypeProduct->setUpdatedAt(new DateTimeImmutable('2998-01-01 00:00:00'));
             $manager->persist($duplicatedImageTypeProduct);
         }
 

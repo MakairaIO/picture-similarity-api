@@ -2,6 +2,7 @@
 
 namespace Makaira\PictureSimilarity\Entity;
 
+use DateTimeImmutable;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Index;
@@ -29,7 +30,7 @@ class PictureSimilarity implements JsonSerializable
     private ?string $shop = null;
 
     #[ORM\Column(type: 'datetime_immutable')]
-    private ?DateTimeInterface $updatedAt = null;
+    private ?DateTimeImmutable $updatedAt = null;
 
     #[ORM\Column(type: 'string', length: 255)]
     private string $type;
@@ -52,7 +53,7 @@ class PictureSimilarity implements JsonSerializable
     }
 
     /**
-     * @return mixed[]
+     * @return array
      */
     public function getSimilarIds(): array
     {
@@ -60,7 +61,9 @@ class PictureSimilarity implements JsonSerializable
     }
 
     /**
-     * @param mixed[] $similarIds
+     * @param array $similarIds
+     *
+     * @return PictureSimilarity
      */
     public function setSimilarIds(array $similarIds): self
     {
@@ -86,7 +89,7 @@ class PictureSimilarity implements JsonSerializable
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(DateTimeInterface $updatedAt): self
+    public function setUpdatedAt(DateTimeImmutable $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
 
@@ -94,7 +97,7 @@ class PictureSimilarity implements JsonSerializable
     }
 
     /**
-     * @return mixed[]
+     * @return array
      */
     public function jsonSerialize(): array
     {
