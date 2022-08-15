@@ -13,7 +13,5 @@ deploy:
     - sudo mkdir -p ${RELEASE_DIR}
     - sudo rsync -auv --exclude-from=.rsync-exclude . ${RELEASE_DIR}
     - sudo rsync -auv --exclude-from=.rsync-exclude .* ${RELEASE_DIR}
-    - echo sudo chown -R www-data:www-data ${RELEASE_DIR}
     - sudo chown -R www-data:www-data ${RELEASE_DIR}
-    - echo sudo ln -snf ${RELEASE_DIR} ${SYMLINK}
     - sudo ln -snf ${RELEASE_DIR} ${SYMLINK}
