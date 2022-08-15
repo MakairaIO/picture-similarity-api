@@ -7,3 +7,5 @@ Procfile
 grumpphp.yml
 phpunit.xml.dist
 rector.php
+grumphp.yml
+.rsync-exclude
