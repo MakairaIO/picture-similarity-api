@@ -1,0 +1,9 @@
+.env.local.example
+.env.test
+.gitignore
+.git
+docker
+Procfile
+grumpphp.yml
+phpunit.xml.dist
+rector.php

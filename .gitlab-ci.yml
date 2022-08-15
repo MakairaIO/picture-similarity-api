@@ -3,8 +3,15 @@ stages:
 
 deploy:
   variables:
-    BASE_RELEASE_DIR: "/var/www/picture-similarity.makaira.cloud"
-    RELEASE_DIR: "${BASE_RELEASE_DIR}/${CI_COMMIT_REF_NAME}-${CI_COMMIT_SHA}-$(date +%Y%m%d%H%M%S)"
+    BASE_RELEASE_DIR: "/var/www/releases/picture-similarity.makaira.cloud"
+    RELEASE_DIR: "${BASE_RELEASE_DIR}/${CI_COMMIT_REF_NAME}-${CI_COMMIT_SHA}"
+    SYMLINK: "/var/www/picture-similarity.makaira.cloud"
   stage: deploy
   script:
-    - echo ${RELEASE_DIR}
+    - test ! -d ${RELEASE_DIR}
+    - composer install -no --no-dev
+    - sudo mkdir -p ${RELEASE_DIR}
+    - sudo rsync -auv --exclude-from=.rsync-exclude . ${RELEASE_DIR}
+    - sudo rsync -auv --exclude-from=.rsync-exclude .* ${RELEASE_DIR}
+    - sudo chown -R www-data:www-data ${RELEASE_DIR}
+    - sudo ln -snf ${RELEASE_DIR} ${SYMLINK}

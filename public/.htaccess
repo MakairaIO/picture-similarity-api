@@ -1,7 +1,7 @@
-#AuthType Basic
-#AuthName "API"
-#AuthUserFile /var/www/picture-similarity.makaira.cloud/.htpasswd
-#Require valid-user
+AuthType Basic
+AuthName "API"
+AuthUserFile /var/www/picture-similarity.makaira.cloud/.htpasswd
+Require valid-user
 
 # Use the front controller as index file. It serves as a fallback solution when
 # every other rewrite/redirect fails (e.g. in an aliased environment without
