@@ -3,8 +3,9 @@ version: '3.7'
 networks:
   proxy:
     external: true
-  mysql:
-    external: true
+
+volumes:
+  db: ~
 
 services:
   web:
@@ -18,7 +19,6 @@ services:
     working_dir: '/app'
     networks:
       proxy:
-      mysql:
       default:
     labels:
       - traefik.port=80
@@ -33,7 +33,7 @@ services:
       PHP_OPCACHE_INI: 1
       PHPINI_UPLOAD_MAX_FILESIZE: 100M
       PHPINI_POST_MAX_SIZE: 100M
-      PHP_ZEND_EXTENSIONS: xdebug.so
+      PHP_ZEND_EXTENSIONS: "xdebug.so"
       PHPINI_XDEBUG__DISCOVER_CLIENT_HOST: "false"
       PHPINI_XDEBUG__CLIENT_HOST: host.docker.internal
       PHPINI_XDEBUG__CLIENT_PORT: 9000
@@ -45,3 +45,16 @@ services:
       PHPINI_XDEBUG__VAR_DISPLAY_MAX_CHILDREN: 256
       PHPINI_XDEBUG__VAR_DISPLAY_MAX_DATA: 1024
       PHPINI_XDEBUG__VAR_DISPLAY_MAX_DEPTH: 10
+      PHP_IDE_CONFIG: serverName=${HOST:-picture-similarity.docker.localhost}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  db:
+    image: mysql:5.7
+    volumes:
+      - "db:/var/lib/mysql/"
+      - "./db/dump/:/docker-entrypoint-initdb.d/:ro"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root}
+    ports:
+      - "33067:3306"

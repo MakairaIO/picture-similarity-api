@@ -1,50 +1,38 @@
 <?php
 
-namespace App\Entity;
+namespace Makaira\PictureSimilarity\Entity;
 
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Index;
 
-use JSONSerializable;
+use JsonSerializable;
+use Makaira\PictureSimilarity\Repository\PictureSimilarityRepository;
 
-/**
- * @ORM\Entity
- * @ORM\Table(name="picture_similarity",indexes={@Index(name="search_idx", columns={"product_id", "shop", "type"})})
- * @ORM\Entity(repositoryClass="App\Entity\PictureSimilarityRepository")
- */
-class PictureSimilarity implements JSONSerializable
+#[ORM\Entity(repositoryClass: PictureSimilarityRepository::class)]
+#[ORM\Table]
+#[Index(columns: ['product_id', 'shop', 'type'])]
+class PictureSimilarity implements JsonSerializable
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
+    private ?int $id = null;
 
-    /**
-     * @ORM\Column(type="string", length=255, name="product_id")
-     */
-    private $productId;
+    #[ORM\Column(type: 'string', length: 255)]
+    private ?string $productId = null;
 
-    /**
-     * @ORM\Column(type="json", name="similar_ids")
-     */
-    private $similarIds = [];
+    #[ORM\Column(type: 'json')]
+    private array $similarIds = [];
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $shop;
+    #[ORM\Column(type: 'string', length: 255)]
+    private ?string $shop = null;
 
-    /**
-     * @ORM\Column(type="datetime", name="updated_at")
-     */
-    private $updatedAt;
+    #[ORM\Column(type: 'datetime_immutable')]
+    private ?DateTimeInterface $updatedAt = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $type;
+    #[ORM\Column(type: 'string', length: 255)]
+    private string $type;
 
     public function getId(): ?int
     {
@@ -63,11 +51,17 @@ class PictureSimilarity implements JSONSerializable
         return $this;
     }
 
-    public function getSimilarIds(): ?array
+    /**
+     * @return mixed[]
+     */
+    public function getSimilarIds(): array
     {
         return $this->similarIds;
     }
 
+    /**
+     * @param mixed[] $similarIds
+     */
     public function setSimilarIds(array $similarIds): self
     {
         $this->similarIds = $similarIds;
@@ -87,32 +81,32 @@ class PictureSimilarity implements JSONSerializable
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeInterface
+    public function getUpdatedAt(): ?DateTimeInterface
     {
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+    public function setUpdatedAt(DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
 
         return $this;
     }
 
-    public function jsonSerialize()
+    /**
+     * @return mixed[]
+     */
+    public function jsonSerialize(): array
     {
         return $this->getSimilarIds();
     }
 
-    /**
-     * @return string
-     */
     public function getType(): string
     {
         return $this->type;
     }
 
-    public function setType($type): self
+    public function setType(string $type): self
     {
         $this->type = $type;
 

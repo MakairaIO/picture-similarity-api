@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Command;
+namespace Makaira\PictureSimilarity\Command;
 
-use App\Entity\PictureSimilarity;
+use Makaira\PictureSimilarity\Entity\PictureSimilarity;
 use Doctrine\DBAL\Driver\Exception;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
@@ -12,16 +12,18 @@ use Symfony\Component\Console\Output\OutputInterface;
 class CommandCleanDuplicatedData extends Command
 {
     // the name of the command (the part after "bin/console")
+    /**
+     * @var string
+     */
     protected static $defaultName = 'app:clean-duplicated-data';
-    protected $entityManager;
 
-    public function __construct(EntityManagerInterface $entityManager)
+
+    public function __construct(protected EntityManagerInterface $entityManager)
     {
         parent::__construct();
-        $this->entityManager = $entityManager;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): ?int
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         try {
             $conn = $this->entityManager->getConnection();
@@ -46,6 +48,7 @@ class CommandCleanDuplicatedData extends Command
                             AND product_id = '{$latestProduct->getProductId()}'";
                 $conn->executeQuery($deleteDuplicatedProductSQL);
             }
+
             $output->write('Command executed successfully!');
             return 0;
         } catch (\Exception | Exception $e) {

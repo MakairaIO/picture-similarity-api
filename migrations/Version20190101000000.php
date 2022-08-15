@@ -1,6 +1,6 @@
 <?php
 
-namespace DoctrineMigrations;
+namespace Makaira\PictureSimilarity\Migrations;
 
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;

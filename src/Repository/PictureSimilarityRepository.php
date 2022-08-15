@@ -1,12 +1,15 @@
 <?php
 
-namespace App\Entity;
+namespace Makaira\PictureSimilarity\Repository;
 
 use Doctrine\ORM\EntityRepository;
 
 class PictureSimilarityRepository extends EntityRepository
 {
-    public function getAvailableTypesByShop($shop): array
+    /**
+     * @return mixed[]
+     */
+    public function getAvailableTypesByShop(string $shop): array
     {
         $queryBuilder = $this->createQueryBuilder('ps');
         $types = $queryBuilder->select('ps.type')

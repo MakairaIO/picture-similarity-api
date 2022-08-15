@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Controller;
+namespace Makaira\PictureSimilarity\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 

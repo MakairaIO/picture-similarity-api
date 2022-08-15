@@ -1,16 +1,16 @@
 <?php
 
-namespace App\DataFixtures;
+namespace Makaira\PictureSimilarity\DataFixtures;
 
-use App\Entity\PictureSimilarity;
+use Makaira\PictureSimilarity\Entity\PictureSimilarity;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 
 class AppFixtures extends Fixture
 {
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
-        for ($i = 1; $i <= 5; $i++) {
+        for ($i = 1; $i <= 5; ++$i) {
             $imageTypeProduct = new PictureSimilarity();
             $imageTypeProduct->setProductId($i);
             $imageTypeProduct->setSimilarIds(['image', 'type', 'product', $i]);

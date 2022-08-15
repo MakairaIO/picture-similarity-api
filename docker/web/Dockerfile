@@ -1,4 +1,4 @@
-FROM marmaladegmbh/php:7.4
+FROM marmaladegmbh/php:8.1
 
 RUN apt update -y && \
     apt install -y wget libssl-dev && \

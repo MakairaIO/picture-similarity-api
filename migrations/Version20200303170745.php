@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DoctrineMigrations;
+namespace Makaira\PictureSimilarity\Migrations;
 
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
@@ -20,7 +20,7 @@ final class Version20200303170745 extends AbstractMigration
     public function up(Schema $schema) : void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', "Migration can only be executed safely on 'mysql'.");
 
         $this->addSql('DROP INDEX search_idx ON picture_similarity');
         $this->addSql('ALTER TABLE picture_similarity ADD type VARCHAR(255) NOT NULL');
@@ -30,7 +30,7 @@ final class Version20200303170745 extends AbstractMigration
     public function down(Schema $schema) : void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', "Migration can only be executed safely on 'mysql'.");
 
         $this->addSql('DROP INDEX search_idx ON picture_similarity');
         $this->addSql('ALTER TABLE picture_similarity DROP type');
