@@ -15,8 +15,7 @@ deploy:
     - echo "APP_SECRET=${APP_SECRET}" >> .env.local
     - sudo mkdir -p ${RELEASE_DIR}
     - echo "Copy source to ${RELEASE_DIR}"
-    - sudo rsync -auv --exclude-from=.rsync-exclude * ${RELEASE_DIR}
-    - sudo rsync -auv --exclude-from=.rsync-exclude .* ${RELEASE_DIR}
+    - sudo rsync -auv --exclude-from=.rsync-exclude * .env .env.local .htpasswd ${RELEASE_DIR}
     - echo "Set owner and group of ${RELEASE_DIR}"
     - sudo chown -R www-data:www-data ${RELEASE_DIR}
     - echo "Symlink ${SYMLINK} to ${RELEASE_DIR}"
