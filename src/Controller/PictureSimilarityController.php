@@ -13,6 +13,7 @@ use Symfony\Component\Serializer\SerializerInterface;
 
 use function array_merge;
 
+#[Route(path: '/api')]
 class PictureSimilarityController
 {
     public function __construct(

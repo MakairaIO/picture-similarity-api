@@ -13,6 +13,7 @@ deploy:
     - echo "DATABASE_URL=${DATABASE_URL}" >> .env.local
     - echo "APP_ENV=prod" >> .env.local
     - echo "APP_SECRET=${APP_SECRET}" >> .env.local
+    - cat <(echo -e "AuthType Basic\nAuthName "'"'API'"'"\nAuthUserFile /var/www/picture-similarity.makaira.cloud/.htpasswd\nRequire valid-user\n") public/.htaccess > public/.htaccess
     - sudo mkdir -p ${RELEASE_DIR}
     - echo "Copy source to ${RELEASE_DIR}"
     - sudo rsync -auv --exclude-from=.rsync-exclude * .env .env.local .htpasswd ${RELEASE_DIR}
