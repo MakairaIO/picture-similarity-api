@@ -14,7 +14,7 @@ class HealthController
      *
      * @return Response
      */
-    #[Route(path: '/health', methods: ['GET'])]
+    #[Route(path: '/health')]
     public function check(Connection $connection): Response
     {
         try {
