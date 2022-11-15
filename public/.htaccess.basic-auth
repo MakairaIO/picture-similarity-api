@@ -4,7 +4,7 @@ AuthUserFile /var/www/picture-similarity.makaira.cloud/.htpasswd
 
 <RequireAny>
     <RequireAll>
-        Require expr "%{REQUEST_URI} =~ m#^/.well-known/.*#"
+        Require expr %{REQUEST_URI} =~ m#^/\.well-known/.*#
     </RequireAll>
 
     Require valid-user
