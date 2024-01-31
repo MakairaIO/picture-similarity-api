@@ -68,7 +68,7 @@ class PictureSimilarityController
                 'type'      => $type,
             ], ['updatedAt' => 'DESC'], 1);
             if (isset($similar[0])) {
-                $similarProducts[] = $similar[0];
+                $similarProducts[] = $similar[0]->getSimilarIds();
             }
         }
 
