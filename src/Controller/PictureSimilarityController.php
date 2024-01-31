@@ -52,7 +52,7 @@ class PictureSimilarityController
      * Find similar products by shop and productIds
      */
     #[Route(path: '/{shop}/products/{productIds}', methods: ['GET'])]
-    #[Route(path: '/{type}/{shop}/products/{$productIdList}', methods: ['GET'])]
+    #[Route(path: '/{type}/{shop}/products/{productIdList}', methods: ['GET'])]
     public function findByProductIds(string $shop, string $productIdList, string $type = 'image'): JsonResponse
     {
         $productIds = explode(',', $productIdList);
