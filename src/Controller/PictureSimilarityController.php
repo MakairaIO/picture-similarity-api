@@ -76,7 +76,7 @@ class PictureSimilarityController
             throw new NotFoundHttpException('No Similar Products found.');
         }
 
-        return $this->json($similarProducts);
+        return $this->json(array_merge(...$similarProducts));
     }
 
     #[Route(path: '{shop}/available-types', methods: ['GET'])]
