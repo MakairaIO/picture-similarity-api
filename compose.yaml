@@ -1,0 +1,29 @@
+services:
+  app:
+    build: .docker/api/
+    volumes:
+      - ".:/app"
+    environment:
+      PHP_IDE_CONFIG: serverName=${HOST:-picture-similarity.docker.localhost}
+    labels:
+      proxy.config: ${HOST:-picture-similarity.docker.localhost}:80
+    networks:
+      - default
+      - proxy
+
+  db:
+    image: mysql:8.4
+    volumes:
+      - "db:/var/lib/mysql"
+      - ".docker/db/:/docker-entrypoint-initdb.d/:ro"
+    environment:
+      MYSQL_DATABASE: picture-similarity
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root}
+
+volumes:
+  db:
+
+networks:
+  proxy:
+    name: dev_proxy
+    external: true
