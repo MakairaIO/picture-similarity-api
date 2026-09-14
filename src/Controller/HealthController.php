@@ -2,12 +2,13 @@
 
 namespace Makaira\PictureSimilarity\Controller;
 
+use Doctrine\DBAL\ArrayParameterType;
 use Doctrine\DBAL\Connection;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 use Throwable;
 
-class HealthController
+final readonly class HealthController
 {
     /**
      * @param Connection $connection
@@ -21,7 +22,7 @@ class HealthController
             $result = $connection->executeQuery(
                 'SELECT COUNT(`SCHEMA_NAME`) FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME` NOT IN (?)',
                 [['mysql', 'performance_schema', 'information_schema', 'sys', 'testshop']],
-                [Connection::PARAM_STR_ARRAY]
+                [ArrayParameterType::STRING]
             );
             $dbCount = $result->fetchOne();
 
