@@ -25,8 +25,10 @@ final readonly class ExceptionListener
         $t = $event->getThrowable();
         $a = $this->formatException($t);
 
-        while (null !== ($previous = $t->getPrevious())) {
-            $a['previous'] = $this->formatException($previous);
+        if (null !== ($previous = $t->getPrevious())) {
+            do {
+                $a['previous'] = $this->formatException($previous);
+            } while (null !== ($previous = $previous->getPrevious()));
         }
 
         $event->setResponse(new JsonResponse($a));
