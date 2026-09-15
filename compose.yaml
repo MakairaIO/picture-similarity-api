@@ -1,6 +1,9 @@
 services:
   app:
-    build: .docker/api/
+    build:
+      context: .docker/api/
+      args:
+        BASE_IMAGE: php:8.5-apache-trixie
     volumes:
       - ".:/app"
     environment:
@@ -10,6 +13,8 @@ services:
     networks:
       - default
       - proxy
+    deploy:
+      replicas: ${DEV_ENV:-1}
 
   db:
     image: mysql:8.4
@@ -19,6 +24,21 @@ services:
     environment:
       MYSQL_DATABASE: picture-similarity
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root}
+
+  app-test:
+    build:
+      context: .docker/api/
+      args:
+        BASE_IMAGE: php:8.5-cli-trixie
+    command:
+      - /app/bin/phpunit
+    volumes:
+      - ".:/app"
+    environment:
+      APP_ENV: test
+      PHP_IDE_CONFIG: serverName=${HOST:-picture-similarity.docker.localhost}
+    deploy:
+      replicas: ${TEST_ENV:-0}
 
 volumes:
   db:

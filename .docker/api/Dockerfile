@@ -1,4 +1,6 @@
-FROM php:8.5-apache-trixie
+ARG BASE_IMAGE
+
+FROM ${BASE_IMAGE}
 
 COPY --from=composer:2 /usr/bin/composer /usr/local/bin/composer
 
@@ -9,7 +11,7 @@ RUN apt update && \
     pecl install xdebug && \
     docker-php-ext-install pcntl zip pdo pdo_mysql && \
     docker-php-ext-enable xdebug && \
-    a2enmod rewrite && \
+    test -z "$(command -v a2enmod > /dev/null 2> /dev/null)" || a2enmod rewrite && \
     rm -rf /var/lib/apt/lists/*
 
 COPY php.ini /usr/local/etc/php/conf.d/zzz-custom.ini
