@@ -5,19 +5,14 @@ namespace Makaira\PictureSimilarity\Command;
 use Makaira\PictureSimilarity\Entity\PictureSimilarity;
 use Doctrine\DBAL\Driver\Exception;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+#[AsCommand(name: 'app:clean-duplicated-data')]
 class CommandCleanDuplicatedData extends Command
 {
-    // the name of the command (the part after "bin/console")
-    /**
-     * @var string
-     */
-    protected static $defaultName = 'app:clean-duplicated-data';
-
-
     public function __construct(protected EntityManagerInterface $entityManager)
     {
         parent::__construct();
@@ -50,10 +45,10 @@ class CommandCleanDuplicatedData extends Command
             }
 
             $output->write('Command executed successfully!');
-            return 0;
+            return Command::SUCCESS;
         } catch (\Exception | Exception $e) {
             $output->write($e->getMessage());
-            return 1;
+            return Command::FAILURE;
         }
     }
 }

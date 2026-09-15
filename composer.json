@@ -2,29 +2,30 @@
     "type": "project",
     "license": "proprietary",
     "require": {
-        "php": "^8.1",
+        "php": "^8.5",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "ext-json": "*",
-        "doctrine/common": "^3.3",
-        "doctrine/doctrine-bundle": "^2.7",
-        "doctrine/doctrine-fixtures-bundle": "^3.4",
-        "doctrine/doctrine-migrations-bundle": "^3.2",
-        "doctrine/orm": "^2.13",
+        "doctrine/common": "^3.4",
+        "doctrine/doctrine-bundle": "^3.3",
+        "doctrine/doctrine-fixtures-bundle": "^4.0",
+        "doctrine/doctrine-migrations-bundle": "^4.0",
+        "doctrine/orm": "^3.4",
         "symfony/apache-pack": "^1.0",
-        "symfony/browser-kit": "^5.4",
-        "symfony/console": "^5.4",
-        "symfony/dotenv": "^5.4",
-        "symfony/error-handler": "5.4.*",
-        "symfony/flex": "^2.2",
-        "symfony/framework-bundle": "^5.4",
-        "symfony/serializer": "5.4.*",
-        "symfony/yaml": "^5.4"
+        "symfony/browser-kit": "^7.4",
+        "symfony/console": "^7.4",
+        "symfony/dotenv": "^7.4",
+        "symfony/error-handler": "^7.4",
+        "symfony/flex": "*",
+        "symfony/framework-bundle": "^7.4",
+        "symfony/serializer": "^7.4",
+        "symfony/yaml": "^7.4"
     },
     "require-dev": {
-        "rector/rector": "^0.13.10",
-        "symfony/maker-bundle": "^1.45",
-        "symfony/phpunit-bridge": "^6.1"
+        "phpunit/phpunit": "^13.3",
+        "rector/rector": "^2.6",
+        "symfony/maker-bundle": "^1.67",
+        "symfony/phpunit-bridge": "^8.0"
     },
     "config": {
         "preferred-install": {
@@ -71,7 +72,7 @@
     "extra": {
         "symfony": {
             "allow-contrib": true,
-            "require": "5.4.*"
+            "require": "7.4.*"
         }
     }
 }

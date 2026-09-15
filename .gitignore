@@ -8,9 +8,21 @@
 ###< symfony/framework-bundle ###
 
 # PHPStorm
-.idea/**
+/.idea/
+/composer.lock
+/compose.override.yaml
+
 ###> symfony/phpunit-bridge ###
 .phpunit
 .phpunit.result.cache
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
+
+###> phpunit/phpunit ###
+/phpunit.xml
+/.phpunit.cache/
+###< phpunit/phpunit ###
+
+###> phpstan/phpstan ###
+phpstan.neon
+###< phpstan/phpstan ###
