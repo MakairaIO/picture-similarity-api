@@ -1,5 +1,0 @@
-CREATE DATABASE `picture-similarity` DEFAULT CHARACTER SET utf8mb4;
-CREATE DATABASE `amataga_1_stage` DEFAULT CHARACTER SET utf8mb4;
-CREATE DATABASE `teamsport_philipp_1_live` DEFAULT CHARACTER SET utf8mb4;
-CREATE DATABASE `adelheidladen_1_stage` DEFAULT CHARACTER SET utf8mb4;
-CREATE DATABASE `asgoodasnew_4_live_de` DEFAULT CHARACTER SET utf8mb4;
