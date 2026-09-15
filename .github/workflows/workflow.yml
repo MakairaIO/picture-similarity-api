@@ -28,9 +28,7 @@ jobs:
 
   release:
     name: Release
-    if: |
-          !(github.event_name == 'push' && contains(github.event.head_commit.message, '[skip ci]')) &&
-          !(github.event_name == 'pull_request' && contains(join(github.event.pull_request.title, github.event.pull_request.body), '[skip ci]'))
+    if: github.event_name != 'workflow_dispatch' && github.event_name != 'pull_request' && github.ref == 'refs/heads/stable'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
