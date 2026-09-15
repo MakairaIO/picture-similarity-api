@@ -2,31 +2,30 @@
 
 namespace Makaira\PictureSimilarity\Controller;
 
-use Doctrine\DBAL\Exception;
 use Doctrine\Persistence\ManagerRegistry;
 use Makaira\PictureSimilarity\Doctrine\DBAL\MultiDbConnectionWrapper;
 use Makaira\PictureSimilarity\Entity\PictureSimilarity;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 
 use function array_merge;
 
 #[Route(path: '/api')]
-class PictureSimilarityController
+final readonly class PictureSimilarityController
 {
     public function __construct(
-        private readonly ManagerRegistry $registry,
-        private readonly SerializerInterface $serializer
+        private ManagerRegistry $registry,
+        private SerializerInterface $serializer,
     ) {
     }
 
     /**
      * Find similar products by shop and productId
      */
-    #[Route(path: '/{shop}/{productId}', methods: ['GET'])]
-    #[Route(path: '/{type}/{shop}/{productId}', methods: ['GET'])]
+    #[Route(path: '/{shop}/{productId}', methods: ['GET'], priority: 10)]
+    #[Route(path: '/{type}/{shop}/{productId}', methods: ['GET'], priority: 10)]
     public function find(string $shop, string $productId, string $type = 'image'): JsonResponse
     {
         $this->setDatabase($shop);
@@ -38,7 +37,7 @@ class PictureSimilarityController
                 'shop'      => $shop,
                 'type'      => $type === 'image' ? ['image', ''] : $type,
             ],
-            ['updatedAt' => 'DESC']
+            ['updatedAt' => 'DESC'],
         );
 
         if ($similar === []) {
@@ -51,22 +50,26 @@ class PictureSimilarityController
     /**
      * Find similar products by shop and productIds
      */
-    #[Route(path: '/{shop}/products/{productIds}', methods: ['GET'])]
-    #[Route(path: '/{type}/{shop}/products/{productIdList}', methods: ['GET'])]
+    #[Route(path: '/{shop}/products/{productIdList}', methods: ['GET'], priority: 20)]
+    #[Route(path: '/{type}/{shop}/products/{productIdList}', methods: ['GET'], priority: 20)]
     public function findByProductIds(string $shop, string $productIdList, string $type = 'image'): JsonResponse
     {
-        $productIds = explode(',', $productIdList);
+        $productIds      = explode(',', $productIdList);
         $similarProducts = [];
 
         $this->setDatabase($shop);
 
         $repository = $this->registry->getRepository(PictureSimilarity::class);
         foreach ($productIds as $productId) {
-            $similar = $repository->findBy([
-                'productId' => $productId,
-                'shop'      => $shop,
-                'type'      => $type,
-            ], ['updatedAt' => 'DESC'], 1);
+            $similar = $repository->findBy(
+                [
+                    'productId' => $productId,
+                    'shop'      => $shop,
+                    'type'      => $type,
+                ],
+                ['updatedAt' => 'DESC'],
+                1,
+            );
             if (isset($similar[0])) {
                 $similarProducts[] = $similar[0]->getSimilarIds();
             }
@@ -79,7 +82,7 @@ class PictureSimilarityController
         return $this->json(array_merge(...$similarProducts));
     }
 
-    #[Route(path: '{shop}/available-types', methods: ['GET'])]
+    #[Route(path: '/{shop}/available-types', methods: ['GET'], priority: 30)]
     public function getAvailableTypes(string $shop): JsonResponse
     {
         $this->setDatabase($shop);
@@ -97,7 +100,7 @@ class PictureSimilarityController
         $json = $this->serializer->serialize(
             $data,
             'json',
-            array_merge(['json_encode_options' => JsonResponse::DEFAULT_ENCODING_OPTIONS], $context)
+            array_merge(['json_encode_options' => JsonResponse::DEFAULT_ENCODING_OPTIONS], $context),
         );
 
         return new JsonResponse($json, $status, $headers, true);
@@ -112,10 +115,7 @@ class PictureSimilarityController
     {
         $connection = $this->registry->getConnection();
         if ($connection instanceof MultiDbConnectionWrapper) {
-            try {
-                $connection->selectDatabase($shop);
-            } catch (Exception) {
-            }
+            $connection->selectDatabase($shop);
         }
     }
 
