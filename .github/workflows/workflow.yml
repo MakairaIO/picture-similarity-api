@@ -28,6 +28,7 @@ jobs:
 
   release:
     name: Release
+    needs: tests
     if: github.event_name != 'workflow_dispatch' && github.event_name != 'pull_request' && github.ref == 'refs/heads/stable'
     runs-on: ubuntu-latest
     steps:
