@@ -71,7 +71,7 @@ final readonly class PictureSimilarityController
                 1,
             );
             if (isset($similar[0])) {
-                $similarProducts[] = $similar[0]->getSimilarIds();
+                $similarProducts[] = array_map(static fn($s) => $s->getSimilarIds(), $similar);
             }
         }
 

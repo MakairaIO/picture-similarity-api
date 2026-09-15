@@ -1,17 +1,20 @@
 <?php
 
-namespace Makaira\PictureSimilarity\Tests\Controller;
+namespace Makaira\PictureSimilarity\Tests\Integration\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
+use function json_decode;
+
+use const JSON_THROW_ON_ERROR;
+
 class PictureSimilarityControllerTest extends WebTestCase
 {
-    public function testFind(): void
+    public function testFindWithoutType(): void
     {
         $client = static::createClient();
 
-        // Test without type
-        $client->request('GET', '/api/testshop/1');
+        $client->request('GET', '/api/testshop_test/1');
         $actualResponse = json_decode($client->getResponse()->getContent(), true, 512, JSON_THROW_ON_ERROR);
         $expectedResponse = [
             "image",
@@ -20,9 +23,13 @@ class PictureSimilarityControllerTest extends WebTestCase
             "1"
         ];
         $this->assertEquals($expectedResponse, $actualResponse);
+    }
 
-        // Test with type
-        $client->request('GET', '/api/notImage/testshop/1');
+    public function testFindWithType(): void
+    {
+        $client = static::createClient();
+
+        $client->request('GET', '/api/notImage/testshop_test/1');
         $actualResponse = json_decode($client->getResponse()->getContent(), true, 512, JSON_THROW_ON_ERROR);
         $expectedResponse = [
             "notImage",
@@ -33,12 +40,12 @@ class PictureSimilarityControllerTest extends WebTestCase
         $this->assertEquals($expectedResponse, $actualResponse);
     }
 
-    public function testFindByProductIds(): void
+    public function testFindByProductIdsWithoutType(): void
     {
         $client = static::createClient();
 
         // Test without type
-        $client->request('GET', '/api/testshop/products/1,2,3');
+        $client->request('GET', '/api/testshop_test/products/1,2,3');
         $actualResponse = json_decode($client->getResponse()->getContent(), true, 512, JSON_THROW_ON_ERROR);
         $expectedResponse = [
             ["image", "type", "product", "1"],
@@ -46,9 +53,14 @@ class PictureSimilarityControllerTest extends WebTestCase
             ["image", "type", "product", "3"]
         ];
         $this->assertEquals($expectedResponse, $actualResponse);
+    }
+
+    public function testFindByProductIdsWithType(): void
+    {
+        $client = static::createClient();
 
         // Test with type
-        $client->request('GET', '/api/notImage/testshop/products/4,5');
+        $client->request('GET', '/api/notImage/testshop_test/products/4,5');
         $actualResponse = json_decode($client->getResponse()->getContent(), true, 512, JSON_THROW_ON_ERROR);
         $expectedResponse = [
             ["notImage", "type", "product", "4"],
@@ -62,7 +74,7 @@ class PictureSimilarityControllerTest extends WebTestCase
         $client = static::createClient();
 
         // Test without type
-        $client->request('GET', '/api/testshop/get-available-types');
+        $client->request('GET', '/api/testshop_test/available-types');
         $actualResponse = json_decode($client->getResponse()->getContent(), true, 512, JSON_THROW_ON_ERROR);
         $expectedResponse = [
             'image',

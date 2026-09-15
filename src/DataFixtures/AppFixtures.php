@@ -15,7 +15,7 @@ class AppFixtures extends Fixture
             $imageTypeProduct = new PictureSimilarity();
             $imageTypeProduct->setProductId($i);
             $imageTypeProduct->setSimilarIds(['image', 'type', 'product', $i]);
-            $imageTypeProduct->setShop('testshop');
+            $imageTypeProduct->setShop('testshop_test');
             $imageTypeProduct->setType('image');
             $imageTypeProduct->setUpdatedAt(new DateTimeImmutable('2999-01-01 00:00:00'));
             $manager->persist($imageTypeProduct);
@@ -23,7 +23,7 @@ class AppFixtures extends Fixture
             $notImageTypeProduct = new PictureSimilarity();
             $notImageTypeProduct->setProductId($i);
             $notImageTypeProduct->setSimilarIds(['notImage', 'type', 'product', $i]);
-            $notImageTypeProduct->setShop('testshop');
+            $notImageTypeProduct->setShop('testshop_test');
             $notImageTypeProduct->setType('notImage');
             $notImageTypeProduct->setUpdatedAt(new DateTimeImmutable('2999-01-01 00:00:00'));
             $manager->persist($notImageTypeProduct);
@@ -32,7 +32,7 @@ class AppFixtures extends Fixture
             $duplicatedImageTypeProduct = new PictureSimilarity();
             $duplicatedImageTypeProduct->setProductId($i);
             $duplicatedImageTypeProduct->setSimilarIds(['older', 'image', 'type', 'product', $i]);
-            $duplicatedImageTypeProduct->setShop('testshop');
+            $duplicatedImageTypeProduct->setShop('testshop_test');
             $duplicatedImageTypeProduct->setType('image');
             $duplicatedImageTypeProduct->setUpdatedAt(new DateTimeImmutable('2998-01-01 00:00:00'));
             $manager->persist($duplicatedImageTypeProduct);
