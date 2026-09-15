@@ -269,23 +269,20 @@
     "symfony/mime": {
         "version": "v4.3.2"
     },
-    "symfony/orm-pack": {
-        "version": "v1.0.6"
-    },
-    "symfony/phpunit-bridge": {
-        "version": "5.1",
+    "symfony/monolog-bundle": {
+        "version": "4.1",
         "recipe": {
             "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "5.1",
-            "ref": "cb82a2355ec62fef0e7028ac969fe86fa722feb8"
+            "branch": "main",
+            "version": "3.7",
+            "ref": "feb8fd9520b5694c7d0d2ba17fd4b4d33f9dd9cf"
         },
         "files": [
-            ".env.test",
-            "bin/phpunit",
-            "phpunit.xml.dist",
-            "tests/bootstrap.php"
+            "config/packages/monolog.yaml"
         ]
+    },
+    "symfony/orm-pack": {
+        "version": "v1.0.6"
     },
     "symfony/polyfill-intl-idn": {
         "version": "v1.11.0"
