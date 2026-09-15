@@ -32,6 +32,8 @@ services:
         BASE_IMAGE: php:8.5-cli-trixie
     command:
       - /app/bin/phpunit
+    depends_on:
+      - db
     volumes:
       - ".:/app"
     environment:

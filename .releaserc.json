@@ -1,0 +1,40 @@
+{
+  "branches": [
+    "stable"
+  ],
+  "plugins": [
+    "@semantic-release/commit-analyzer",
+    "@semantic-release/release-notes-generator",
+    "@semantic-release/changelog",
+    [
+      "@semantic-release/exec",
+      {
+        "prepareCmd": ".github/bin/replace-version src/Version.php ${nextRelease.version}"
+      }
+    ],
+    [
+      "@semantic-release/exec",
+      {
+        "prepareCmd": "tar -czf /tmp/release-package.tar.gz --exclude-vcs -X .release-package-ignore ."
+      }
+    ],
+    [
+      "@semantic-release/git",
+      {
+        "assets": ["CHANGELOG.md"]
+      }
+    ],
+    [
+      "@semantic-release/github",
+      {
+        "assets": [
+          {
+            "path": "/tmp/release-package.tar.gz",
+            "label": "Application release ${nextRelease.version}",
+            "name": "application-${nextRelease.version}.tar.gz"
+          }
+        ]
+      }
+    ]
+  ]
+}

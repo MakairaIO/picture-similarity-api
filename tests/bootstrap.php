@@ -13,8 +13,6 @@ if ($_SERVER['APP_DEBUG']) {
     umask(0000);
 }
 
-$output = new Symfony\Component\Console\Output\ConsoleOutput();
-
 $spawnConsole = static function (string ...$args) {
     $command = array_merge(['bin/console', '--ansi', '-n', '--env=test'], $args);
     $p = new PhpSubprocess($command);
@@ -22,7 +20,6 @@ $spawnConsole = static function (string ...$args) {
     echo $p->getOutput();
 };
 
-$spawnConsole('doctrine:database:drop', '--force');
-$spawnConsole('doctrine:database:create');
+$spawnConsole('doctrine:schema:drop', '--force');
 $spawnConsole('doctrine:schema:create');
 $spawnConsole('doctrine:fixtures:load', '--append');
