@@ -22,3 +22,4 @@ phpstan.neon
 /.phpunit.cache/
 ###< phpunit/phpunit ###
 .gitlab-ci.yml
+/.http-api/http-client.private.env.json
