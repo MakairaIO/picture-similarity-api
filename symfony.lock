@@ -26,6 +26,15 @@
     "doctrine/dbal": {
         "version": "v2.9.2"
     },
+    "doctrine/deprecations": {
+        "version": "1.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "1.0",
+            "ref": "fdd756167454623e21f1d769c5b814b243782a67"
+        }
+    },
     "doctrine/doctrine-bundle": {
         "version": "1.6",
         "recipe": {
@@ -107,6 +116,33 @@
     },
     "ocramius/proxy-manager": {
         "version": "2.1.1"
+    },
+    "phpstan/phpstan": {
+        "version": "2.2",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "1.0",
+            "ref": "5e490cc197fb6bb1ae22e5abbc531ddc633b6767"
+        },
+        "files": [
+            "phpstan.dist.neon"
+        ]
+    },
+    "phpunit/phpunit": {
+        "version": "13.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "11.1",
+            "ref": "ca0bc067abfb40a8de1b2561b96cbfc2b833c314"
+        },
+        "files": [
+            ".env.test",
+            "phpunit.xml.dist",
+            "tests/bootstrap.php",
+            "bin/phpunit"
+        ]
     },
     "psr/cache": {
         "version": "1.0.1"
@@ -233,23 +269,20 @@
     "symfony/mime": {
         "version": "v4.3.2"
     },
-    "symfony/orm-pack": {
-        "version": "v1.0.6"
-    },
-    "symfony/phpunit-bridge": {
-        "version": "5.1",
+    "symfony/monolog-bundle": {
+        "version": "4.1",
         "recipe": {
             "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "5.1",
-            "ref": "cb82a2355ec62fef0e7028ac969fe86fa722feb8"
+            "branch": "main",
+            "version": "3.7",
+            "ref": "feb8fd9520b5694c7d0d2ba17fd4b4d33f9dd9cf"
         },
         "files": [
-            ".env.test",
-            "bin/phpunit",
-            "phpunit.xml.dist",
-            "tests/bootstrap.php"
+            "config/packages/monolog.yaml"
         ]
+    },
+    "symfony/orm-pack": {
+        "version": "v1.0.6"
     },
     "symfony/polyfill-intl-idn": {
         "version": "v1.11.0"
