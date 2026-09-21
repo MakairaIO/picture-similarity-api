@@ -2,15 +2,24 @@
 /.env.local
 /.env.local.php
 /.env.*.local
+/config/secrets/prod/prod.decrypt.private.php
 /public/bundles/
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
 
 # PHPStorm
-.idea/**
-###> symfony/phpunit-bridge ###
-.phpunit
-.phpunit.result.cache
+/.idea/
+/composer.lock
+/compose.override.yaml
+
+###> phpstan/phpstan ###
+phpstan.neon
+###< phpstan/phpstan ###
+
+###> phpunit/phpunit ###
 /phpunit.xml
-###< symfony/phpunit-bridge ###
+/.phpunit.cache/
+###< phpunit/phpunit ###
+.gitlab-ci.yml
+/.http-api/http-client.private.env.json

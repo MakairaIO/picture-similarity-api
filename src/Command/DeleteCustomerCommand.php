@@ -6,6 +6,7 @@ use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\ParameterType;
 use Makaira\PictureSimilarity\Doctrine\DBAL\DatabaseNameNormalizerTrait;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -14,6 +15,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use function preg_replace;
 use function sprintf;
 
+#[AsCommand('customer:delete', description: 'Remove all databases of a customer.')]
 class DeleteCustomerCommand extends Command
 {
     use DatabaseNameNormalizerTrait;
@@ -28,9 +30,8 @@ class DeleteCustomerCommand extends Command
         $this->addArgument(
             'customers',
             InputArgument::REQUIRED | InputArgument::IS_ARRAY,
-            'Name of the customer. This is the subdomain part from *.makaira.io or the whole domain.'
+            'Name of the customer. This is the subdomain part from *.makaira.io or the whole domain.',
         );
-        $this->setDescription('Remove all databases of a customer.');
     }
 
     /**
@@ -49,7 +50,7 @@ class DeleteCustomerCommand extends Command
             $databases = $this->connection->executeQuery(
                 'SELECT `SCHEMA_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME` LIKE ?',
                 ["{$customerPrefix}%"],
-                [ParameterType::STRING]
+                [ParameterType::STRING],
             );
 
             foreach ($databases->iterateColumn() as $dbName) {

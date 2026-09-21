@@ -1,0 +1,24 @@
+### Search for similar products
+# @no-cookie-jar
+# @no-log
+GET {{baseUri}}/api/{{shop}}/{{productId}}
+
+### Search for similar product images
+# @no-cookie-jar
+# @no-log
+GET {{baseUri}}/api/image/{{shop}}/{{productId}}
+
+### Search for similar products
+# @no-cookie-jar
+# @no-log
+GET {{baseUri}}/api/{{shop}}/products/{{productIds}}
+
+### Search for similar product images
+# @no-cookie-jar
+# @no-log
+GET {{baseUri}}/api/image/{{shop}}/products/{{productIds}}
+
+### Search for similar products
+# @no-cookie-jar
+# @no-log
+GET {{baseUri}}/api/{{shop}}/available-types

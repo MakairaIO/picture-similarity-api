@@ -13,7 +13,6 @@ final class MultiDbConnectionWrapper extends Connection
      * @param string $dbName
      *
      * @return void
-     * @throws Exception
      */
     public function selectDatabase(string $dbName): void
     {
@@ -23,6 +22,6 @@ final class MultiDbConnectionWrapper extends Connection
 
         $params           = $this->getParams();
         $params['dbname'] = $this->normalize($dbName);
-        $this->__construct($params, $this->_driver, $this->_config, $this->_eventManager);
+        $this->__construct($params, $this->driver, $this->_config);
     }
 }

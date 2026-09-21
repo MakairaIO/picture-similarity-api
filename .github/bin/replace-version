@@ -1,0 +1,24 @@
+#!/usr/bin/env python3
+
+import argparse
+import re
+import sys
+
+
+def do_replace(file, version):
+    with open(file, 'r+', encoding="utf-8") as f:
+        content = f.read()
+        new_content = re.sub('RELEASE_VERSION = \'[^\']+\';', f"RELEASE_VERSION = '{version}';", content)
+        f.seek(0, 0)
+        f.truncate()
+        f.write(new_content)
+
+parser = argparse.ArgumentParser(
+    prog="replace-version",
+    description="Replace the a placeholder with a real version string in a PHP file"
+)
+parser.add_argument('filename', help="File where to replace the version string.")
+parser.add_argument('version', help="New version string to write into the file.")
+args = parser.parse_args()
+
+do_replace(args.filename, args.version)
