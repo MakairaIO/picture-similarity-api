@@ -30,8 +30,8 @@
         "assets": [
           {
             "path": "/tmp/release-package.tar.gz",
-            "label": "Application release ${nextRelease.version}",
-            "name": "application-${nextRelease.version}.tar.gz"
+            "label": "Picture Similarity API - ${nextRelease.version}",
+            "name": "picture-similarity-api-${nextRelease.version}.tar.gz"
           }
         ]
       }
