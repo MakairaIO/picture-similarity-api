@@ -68,7 +68,7 @@ jobs:
         env:
           CI_REGISTRY_USER: ${{ secrets.CI_REGISTRY_USER }}
           CI_REGISTRY_PASSWORD: ${{ secrets.CI_REGISTRY_PASSWORD }}
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN_NEW }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GIT_AUTHOR_NAME: ${{ secrets.GIT_USERNAME }}
           GIT_AUTHOR_EMAIL: ${{ secrets.GIT_EMAIL }}
           GIT_COMMITTER_NAME: ${{ secrets.GIT_USERNAME }}
