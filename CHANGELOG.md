@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/MakairaIO/picture-similarity-api/compare/v1.0.0...v1.0.1) (2026-09-22)
+
+
+### Bug Fixes
+
+* Use default GitHub token ([af2c311](https://github.com/MakairaIO/picture-similarity-api/commit/af2c311bc9443ed565db41a3be44606d1e84dbe1))
+
 # 1.0.0 (2026-09-22)
 
 
