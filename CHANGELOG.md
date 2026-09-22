@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/MakairaIO/picture-similarity-api/compare/v1.0.2...v1.0.3) (2026-09-22)
+
+
+### Bug Fixes
+
+* Change file handling for release package ([e9952e9](https://github.com/MakairaIO/picture-similarity-api/commit/e9952e99f86a7a46441e8f0578e5612deb65f69d))
+
 ## [1.0.2](https://github.com/MakairaIO/picture-similarity-api/compare/v1.0.1...v1.0.2) (2026-09-22)
 
 
