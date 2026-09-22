@@ -18,3 +18,7 @@ phpstan.dist.neon
 phpunit.xml.dist
 public/.htaccess.basic-auth
 rector.php
+DOCKER_ENV
+Dockerfile-php-build
+docker_tag
+output.log
