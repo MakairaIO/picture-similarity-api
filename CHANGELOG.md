@@ -1,3 +1,11 @@
+## [1.0.2](https://github.com/MakairaIO/picture-similarity-api/compare/v1.0.1...v1.0.2) (2026-09-22)
+
+
+### Bug Fixes
+
+* Change default env ([0bc5b0f](https://github.com/MakairaIO/picture-similarity-api/commit/0bc5b0f82006cd37a519b383ec5d7ed054e890f4))
+* Rename distribution env file ([b9215a7](https://github.com/MakairaIO/picture-similarity-api/commit/b9215a7894572f3dd6346c28f041a473d6601c94))
+
 ## [1.0.1](https://github.com/MakairaIO/picture-similarity-api/compare/v1.0.0...v1.0.1) (2026-09-22)
 
 
