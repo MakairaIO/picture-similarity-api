@@ -1,3 +1,10 @@
+## [1.0.5](https://github.com/MakairaIO/picture-similarity-api/compare/v1.0.4...v1.0.5) (2026-09-22)
+
+
+### Bug Fixes
+
+* Fix DB migrations ([b13bbd3](https://github.com/MakairaIO/picture-similarity-api/commit/b13bbd3cce4af47a6c363f0f6602660897631564))
+
 ## [1.0.4](https://github.com/MakairaIO/picture-similarity-api/compare/v1.0.3...v1.0.4) (2026-09-22)
 
 
