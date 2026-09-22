@@ -1,3 +1,10 @@
+## [1.0.4](https://github.com/MakairaIO/picture-similarity-api/compare/v1.0.3...v1.0.4) (2026-09-22)
+
+
+### Bug Fixes
+
+* Include env files ([2823d2d](https://github.com/MakairaIO/picture-similarity-api/commit/2823d2d497f8c2e56e8a10090dd5f35af56135cf))
+
 ## [1.0.3](https://github.com/MakairaIO/picture-similarity-api/compare/v1.0.2...v1.0.3) (2026-09-22)
 
 
