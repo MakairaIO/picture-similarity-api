@@ -1,6 +1,6 @@
 <?php
 
-namespace Makaira\PictureSimilarity\Command;
+namespace Makaira\PictureSimilarity\Command\HouseKeeping;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
@@ -15,14 +15,18 @@ use Symfony\Component\Console\Output\OutputInterface;
 use function preg_replace;
 use function sprintf;
 
-#[AsCommand('customer:delete', description: 'Remove all databases of a customer.')]
-class DeleteCustomerCommand extends Command
+#[AsCommand(
+    name: 'house-keeping:remove-customer',
+    description: 'Remove all databases of a customer.',
+    aliases: ['customer:delete']
+)]
+class RemoveCustomerCommand extends Command
 {
     use DatabaseNameNormalizerTrait;
 
-    public function __construct(private readonly Connection $connection, string $name = null)
+    public function __construct(private readonly Connection $connection)
     {
-        parent::__construct($name);
+        parent::__construct();
     }
 
     protected function configure(): void

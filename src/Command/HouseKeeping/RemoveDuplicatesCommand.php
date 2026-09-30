@@ -1,17 +1,21 @@
 <?php
 
-namespace Makaira\PictureSimilarity\Command;
+namespace Makaira\PictureSimilarity\Command\HouseKeeping;
 
-use Makaira\PictureSimilarity\Entity\PictureSimilarity;
-use Doctrine\DBAL\Driver\Exception;
+use Doctrine\DBAL\Exception as DBALException;
 use Doctrine\ORM\EntityManagerInterface;
+use Makaira\PictureSimilarity\Entity\PictureSimilarity;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-#[AsCommand(name: 'app:clean-duplicated-data')]
-class CommandCleanDuplicatedData extends Command
+#[AsCommand(
+    name: 'house-keeping:remove-duplicates',
+    description: 'Remove duplicate records',
+    aliases: ['app:clean-duplicated-data'],
+)]
+class RemoveDuplicatesCommand extends Command
 {
     public function __construct(protected EntityManagerInterface $entityManager)
     {
@@ -38,15 +42,16 @@ class CommandCleanDuplicatedData extends Command
                     'productId' => $duplicatedProduct['product_id'],
                 ], ['updatedAt' => 'DESC'], 1)[0];
 
-                $deleteDuplicatedProductSQL = "DELETE FROM picture_similarity 
-                        WHERE id != {$latestProduct->getId()} 
-                            AND product_id = '{$latestProduct->getProductId()}'";
-                $conn->executeQuery($deleteDuplicatedProductSQL);
+                $deleteDuplicatedProductSQL = "DELETE FROM picture_similarity WHERE id != ? AND product_id = ?";
+                $conn->executeQuery(
+                    $deleteDuplicatedProductSQL,
+                    [$latestProduct->getId(), $latestProduct->getProductId()]
+                );
             }
 
             $output->write('Command executed successfully!');
             return Command::SUCCESS;
-        } catch (\Exception | Exception $e) {
+        } catch (DBALException $e) {
             $output->write($e->getMessage());
             return Command::FAILURE;
         }
