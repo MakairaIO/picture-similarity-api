@@ -1,3 +1,15 @@
+# [1.3.0](https://github.com/MakairaIO/picture-similarity-api/compare/v1.2.0...v1.3.0) (2026-09-30)
+
+
+### Bug Fixes
+
+* **Migrations:** Disable transactions by default ([144877c](https://github.com/MakairaIO/picture-similarity-api/commit/144877ceeccaae5fc2392454aa3e8ee162bae752))
+
+
+### Features
+
+* Update dependencies ([699b642](https://github.com/MakairaIO/picture-similarity-api/commit/699b642e7ff83e386f91000c5a7f02f60e3ab66c))
+
 # [1.2.0](https://github.com/MakairaIO/picture-similarity-api/compare/v1.1.0...v1.2.0) (2026-09-30)
 
 
