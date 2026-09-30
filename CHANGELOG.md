@@ -1,3 +1,16 @@
+# [1.2.0](https://github.com/MakairaIO/picture-similarity-api/compare/v1.1.0...v1.2.0) (2026-09-30)
+
+
+### Bug Fixes
+
+* Missing migrations ([aabc7ac](https://github.com/MakairaIO/picture-similarity-api/commit/aabc7acda9f1bffafb69fa91bd20fb6166b881e9))
+* Optimize indices ([0255bb9](https://github.com/MakairaIO/picture-similarity-api/commit/0255bb9e8b97f0e6a16c64eaeb8c45673b43ca66))
+
+
+### Features
+
+* Remove the possibility of duplicate entries ([d823ef7](https://github.com/MakairaIO/picture-similarity-api/commit/d823ef71f5224c6fe3a438d06f0d0bdb66ee3125))
+
 # [1.1.0](https://github.com/MakairaIO/picture-similarity-api/compare/v1.0.5...v1.1.0) (2026-09-30)
 
 
