@@ -25,4 +25,9 @@ final class Version20260930105227 extends AbstractMigration
         $this->addSql('DROP INDEX UNIQ_48FAE1478CDE5729AC6A4CA24584665A ON picture_similarity');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_48FAE1474584665AAC6A4CA28CDE5729 ON picture_similarity (product_id, shop, type)');
     }
+
+    public function isTransactional(): bool
+    {
+        return false;
+    }
 }

@@ -2,3 +2,4 @@ doctrine_migrations:
     migrations_paths:
         'Makaira\PictureSimilarity\Migrations': '%kernel.project_dir%/migrations'
     enable_profiler: '%kernel.debug%'
+    transactional: false
