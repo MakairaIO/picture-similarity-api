@@ -10,7 +10,9 @@
 
 # PHPStorm
 /.idea/
-/composer.lock
+/node_modules/
+/.gitlab-ci.yml
+/.http-api/http-client.private.env.json
 /compose.override.yaml
 
 ###> phpstan/phpstan ###
@@ -21,6 +23,3 @@ phpstan.neon
 /phpunit.xml
 /.phpunit.cache/
 ###< phpunit/phpunit ###
-.gitlab-ci.yml
-/.http-api/http-client.private.env.json
-/node_modules/
