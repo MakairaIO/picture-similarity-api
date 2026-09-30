@@ -1,3 +1,12 @@
+# [1.1.0](https://github.com/MakairaIO/picture-similarity-api/compare/v1.0.5...v1.1.0) (2026-09-30)
+
+
+### Features
+
+* Add console commands to import a CSV ([1264431](https://github.com/MakairaIO/picture-similarity-api/commit/1264431556d9893f2a13133b779dec73fb6d62a3))
+* Enable file import in local MySQL ([2e58d95](https://github.com/MakairaIO/picture-similarity-api/commit/2e58d95999838df793914817c2fa4454a2bff92f))
+* Move console commands to sub-namespace ([3e16b45](https://github.com/MakairaIO/picture-similarity-api/commit/3e16b4548bb4c096467c6ed48c6cc7c16466af6f))
+
 ## [1.0.5](https://github.com/MakairaIO/picture-similarity-api/compare/v1.0.4...v1.0.5) (2026-09-22)
 
 
