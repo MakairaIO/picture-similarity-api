@@ -13,7 +13,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 #[AsCommand("database:create", description: "Create a new database.")]
 class CreateCommand extends Command
 {
-
     public function __construct(private readonly Connection $connection)
     {
         parent::__construct();
@@ -28,7 +27,7 @@ class CreateCommand extends Command
     {
         try {
             $this->connection->executeStatement(
-                "CREATE DATABASE IF NOT EXISTS `{$input->getArgument('database')}`"
+                "CREATE DATABASE IF NOT EXISTS `{$input->getArgument('database')}`",
             );
         } catch (Exception $e) {
             $this->getApplication()->renderThrowable($e, $output);

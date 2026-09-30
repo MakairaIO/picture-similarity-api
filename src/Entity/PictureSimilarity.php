@@ -5,14 +5,14 @@ namespace Makaira\PictureSimilarity\Entity;
 use DateTimeImmutable;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\Index;
 
 use JsonSerializable;
 use Makaira\PictureSimilarity\Repository\PictureSimilarityRepository;
 
 #[ORM\Entity(repositoryClass: PictureSimilarityRepository::class)]
 #[ORM\Table]
-#[Index(columns: ['product_id', 'shop', 'type'])]
+#[ORM\Index('updated_at', columns: ['updated_at'])]
+#[ORM\UniqueConstraint(columns: ['type', 'shop', 'product_id'])]
 class PictureSimilarity implements JsonSerializable
 {
     #[ORM\Id]

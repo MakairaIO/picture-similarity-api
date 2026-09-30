@@ -38,9 +38,13 @@ class RemoveDuplicatesCommand extends Command
             $pictureSimilarityRepository = $this->entityManager->getRepository(PictureSimilarity::class);
             foreach ($duplicatedProducts as $duplicatedProduct) {
                 // Get the latest product of the duplicated product
-                $latestProduct = $pictureSimilarityRepository->findBy([
-                    'productId' => $duplicatedProduct['product_id'],
-                ], ['updatedAt' => 'DESC'], 1)[0];
+                $findResult = $pictureSimilarityRepository->findBy(
+                    ['productId' => $duplicatedProduct['product_id']],
+                    ['updatedAt' => 'DESC'],
+                    1
+                )[0];
+
+                $latestProduct = reset($findResult);
 
                 $deleteDuplicatedProductSQL = "DELETE FROM picture_similarity WHERE id != ? AND product_id = ?";
                 $conn->executeQuery(

@@ -14,6 +14,9 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Throwable;
 
+use function basename;
+use function preg_replace;
+
 #[AsCommand(name: 'database:import-csv', description: 'Import a picture-similarity CSV file')]
 class ImportCsvCommand extends Command
 {
@@ -25,7 +28,6 @@ class ImportCsvCommand extends Command
     protected function configure(): void
     {
         $this->addArgument('csv-file', InputArgument::REQUIRED);
-        $this->addArgument('database', InputArgument::REQUIRED);
     }
 
     public function __invoke(
@@ -34,8 +36,9 @@ class ImportCsvCommand extends Command
         Application $application,
     ): int {
         try {
-            $database  = $input->getArgument('database');
-            $initInput = new ArrayInput(
+            $csvFilename = $input->getArgument('csv-file');
+            $database    = $this->getDbName($csvFilename);
+            $initInput   = new ArrayInput(
                 [
                     'command'  => 'database:initialize',
                     'database' => $database,
@@ -52,8 +55,8 @@ class ImportCsvCommand extends Command
             );
 
             $importStatement = <<<EOT
-LOAD DATA INFILE '{$input->getArgument('csv-file')}'
-    INTO TABLE `{$database}`.picture_similarity 
+LOAD DATA INFILE '{$csvFilename}'
+    REPLACE INTO TABLE `{$database}`.picture_similarity 
     FIELDS TERMINATED BY ',' 
     OPTIONALLY ENCLOSED BY '"'
     ESCAPED BY '"'
@@ -68,5 +71,12 @@ EOT;
         }
 
         return Command::SUCCESS;
+    }
+
+    private function getDbName(string $fullyQualifiedFilename): string
+    {
+        $filename = basename($fullyQualifiedFilename, '.csv');
+
+        return preg_replace('/\W/', '_', $filename);
     }
 }
