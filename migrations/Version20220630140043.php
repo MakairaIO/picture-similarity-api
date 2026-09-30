@@ -16,4 +16,9 @@ final class Version20220630140043 extends AbstractMigration
     {
         $this->addSql('ALTER TABLE picture_similarity DROP INDEX updated_at');
     }
+
+    public function isTransactional(): bool
+    {
+        return false;
+    }
 }

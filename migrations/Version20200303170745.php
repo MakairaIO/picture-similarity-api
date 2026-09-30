@@ -25,4 +25,9 @@ final class Version20200303170745 extends AbstractMigration
         $this->addSql('ALTER TABLE picture_similarity DROP type');
         $this->addSql('CREATE INDEX search_idx ON picture_similarity (product_id, shop)');
     }
+
+    public function isTransactional(): bool
+    {
+        return false;
+    }
 }

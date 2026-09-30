@@ -25,4 +25,9 @@ final class Version20190710081537 extends AbstractMigration
             'ALTER TABLE picture_similarity CHANGE product_id product_id VARCHAR(100) NOT NULL COLLATE utf8mb4_unicode_ci, CHANGE similar_ids similar_ids LONGTEXT NOT NULL COLLATE utf8mb4_bin, CHANGE shop shop VARCHAR(100) NOT NULL COLLATE utf8mb4_unicode_ci',
         );
     }
+
+    public function isTransactional(): bool
+    {
+        return false;
+    }
 }

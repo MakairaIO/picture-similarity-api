@@ -26,4 +26,9 @@ class Version20190101000000 extends AbstractMigration
     {
         $this->addSql('DROP TABLE picture_similarity');
     }
+
+    public function isTransactional(): bool
+    {
+        return false;
+    }
 }
