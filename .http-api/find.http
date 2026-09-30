@@ -2,23 +2,28 @@
 # @no-cookie-jar
 # @no-log
 GET {{baseUri}}/api/{{shop}}/{{productId}}
+Host: {{host}}
 
 ### Search for similar product images
 # @no-cookie-jar
 # @no-log
 GET {{baseUri}}/api/image/{{shop}}/{{productId}}
+Host: {{host}}
 
 ### Search for similar products
 # @no-cookie-jar
 # @no-log
 GET {{baseUri}}/api/{{shop}}/products/{{productIds}}
+Host: {{host}}
 
 ### Search for similar product images
 # @no-cookie-jar
 # @no-log
 GET {{baseUri}}/api/image/{{shop}}/products/{{productIds}}
+Host: {{host}}
 
 ### Search for similar products
 # @no-cookie-jar
 # @no-log
 GET {{baseUri}}/api/{{shop}}/available-types
+Host: {{host}}
