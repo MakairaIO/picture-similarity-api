@@ -17,10 +17,11 @@ services:
       replicas: ${DEV_ENV:-1}
 
   db:
-    image: mysql:8.4
+    build: .docker/db/
     volumes:
       - "db:/var/lib/mysql"
-      - ".docker/db/:/docker-entrypoint-initdb.d/:ro"
+      - ".docker/db/dumps/:/docker-entrypoint-initdb.d/:ro"
+      - "./data/db/:/var/lib/mysql-files/"
     environment:
       MYSQL_DATABASE: picture-similarity
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root}
