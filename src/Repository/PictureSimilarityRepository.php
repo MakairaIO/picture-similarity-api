@@ -6,9 +6,6 @@ use Doctrine\ORM\EntityRepository;
 
 class PictureSimilarityRepository extends EntityRepository
 {
-    /**
-     * @return mixed[]
-     */
     public function getAvailableTypesByShop(string $shop): array
     {
         $queryBuilder = $this->createQueryBuilder('ps');
