@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/MakairaIO/picture-similarity-api/compare/v1.3.0...v1.4.0) (2026-10-02)
+
+
+### Features
+
+* **Databases:** Add cli command to list customer databases ([4533e66](https://github.com/MakairaIO/picture-similarity-api/commit/4533e667e1edaa08277b1088318cde8597b2f898))
+
 # [1.3.0](https://github.com/MakairaIO/picture-similarity-api/compare/v1.2.0...v1.3.0) (2026-09-30)
 
 
