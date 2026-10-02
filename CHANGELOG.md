@@ -1,3 +1,10 @@
+## [1.4.1](https://github.com/MakairaIO/picture-similarity-api/compare/v1.4.0...v1.4.1) (2026-10-02)
+
+
+### Bug Fixes
+
+* Get the table name from the EntityManager rather than hardcoding it in the code ([f33b55c](https://github.com/MakairaIO/picture-similarity-api/commit/f33b55c704cbcf4fdbc0517336f2e925fbd468c5))
+
 # [1.4.0](https://github.com/MakairaIO/picture-similarity-api/compare/v1.3.0...v1.4.0) (2026-10-02)
 
 
