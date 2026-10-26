@@ -68,6 +68,7 @@ EOT;
             $this->connection->executeStatement($importStatement);
         } catch (Throwable $t) {
             $application->renderThrowable($t, $output);
+            return Command::FAILURE;
         }
 
         return Command::SUCCESS;
