@@ -1,4 +1,0 @@
-services:
-  db:
-    ports:
-      - "33306:3306"
