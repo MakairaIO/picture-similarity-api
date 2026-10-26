@@ -61,25 +61,26 @@ final readonly class PictureSimilarityController
 
         $repository = $this->registry->getRepository(PictureSimilarity::class);
         foreach ($productIds as $productId) {
-            $similar = $repository->findBy(
+            $similar = $repository->findOneBy(
                 [
                     'productId' => $productId,
                     'shop'      => $shop,
                     'type'      => $type,
                 ],
                 ['updatedAt' => 'DESC'],
-                1,
             );
-            if (isset($similar[0])) {
-                $similarProducts[] = array_map(static fn($s) => $s->getSimilarIds(), $similar);
-            }
+
+            $similarProducts[] = $similar->getSimilarIds();
         }
 
         if (empty($similarProducts)) {
             throw new NotFoundHttpException('No Similar Products found.');
         }
 
-        return $this->json(array_merge(...$similarProducts));
+        $flatten = array_merge(...$similarProducts);
+        $unique = array_keys(array_flip($flatten));
+
+        return $this->json($unique);
     }
 
     #[Route(path: '/{shop}/available-types', methods: ['GET'], priority: 30)]

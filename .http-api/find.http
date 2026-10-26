@@ -3,27 +3,32 @@
 # @no-log
 GET {{baseUri}}/api/{{shop}}/{{productId}}
 Host: {{host}}
+Cookie: XDEBUG_TRIGGER=42
 
 ### Search for similar product images
 # @no-cookie-jar
 # @no-log
 GET {{baseUri}}/api/image/{{shop}}/{{productId}}
 Host: {{host}}
+Cookie: XDEBUG_TRIGGER=42
 
 ### Search for similar products
 # @no-cookie-jar
 # @no-log
 GET {{baseUri}}/api/{{shop}}/products/{{productIds}}
 Host: {{host}}
+Cookie: XDEBUG_TRIGGER=42
 
 ### Search for similar product images
 # @no-cookie-jar
 # @no-log
 GET {{baseUri}}/api/image/{{shop}}/products/{{productIds}}
 Host: {{host}}
+Cookie: XDEBUG_TRIGGER=42
 
 ### Search for similar products
 # @no-cookie-jar
 # @no-log
 GET {{baseUri}}/api/{{shop}}/available-types
 Host: {{host}}
+Cookie: XDEBUG_TRIGGER=42
