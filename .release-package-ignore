@@ -8,14 +8,12 @@ tests/
 .env.dist
 .env.test
 .gitignore
-.htpasswd
 .release-package-ignore
 .releaserc.json
 compose.*.yaml
 compose.yaml
 phpstan.dist.neon
 phpunit.xml.dist
-public/.htaccess.basic-auth
 rector.php
 DOCKER_ENV
 Dockerfile-php-build
