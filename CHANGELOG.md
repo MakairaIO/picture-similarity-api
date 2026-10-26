@@ -1,3 +1,13 @@
+## [1.4.2](https://github.com/MakairaIO/picture-similarity-api/compare/v1.4.1...v1.4.2) (2026-10-26)
+
+
+### Bug Fixes
+
+* Apply .htaccess patch on release build ([a7971d0](https://github.com/MakairaIO/picture-similarity-api/commit/a7971d058a71254d6f5981319086b059c502781e))
+* Exit with error if CSV import fails ([2fee566](https://github.com/MakairaIO/picture-similarity-api/commit/2fee566b886f4d2c5915adf0f2644a225351c424))
+* Fix response structure ([794e05c](https://github.com/MakairaIO/picture-similarity-api/commit/794e05c793175face98c9d2caa93b23c7192a811))
+* Update test expectations ([d9bee10](https://github.com/MakairaIO/picture-similarity-api/commit/d9bee10ca86831686ca6dd373d17a932607cd2e5))
+
 ## [1.4.1](https://github.com/MakairaIO/picture-similarity-api/compare/v1.4.0...v1.4.1) (2026-10-02)
 
 
