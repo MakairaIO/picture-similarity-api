@@ -1,3 +1,10 @@
+## [1.4.3](https://github.com/MakairaIO/picture-similarity-api/compare/v1.4.2...v1.4.3) (2026-10-28)
+
+
+### Bug Fixes
+
+* Add check if similarity data was found ([e23c565](https://github.com/MakairaIO/picture-similarity-api/commit/e23c565856c7cfa1209fb518f129b84bab7b5a56))
+
 ## [1.4.2](https://github.com/MakairaIO/picture-similarity-api/compare/v1.4.1...v1.4.2) (2026-10-26)
 
 
