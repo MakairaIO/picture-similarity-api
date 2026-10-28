@@ -25,30 +25,30 @@ final readonly class ExceptionListener
         $t = $event->getThrowable();
         $a = $this->formatException($t);
 
-        if (null !== ($previous = $t->getPrevious())) {
-            do {
-                $a['previous'] = $this->formatException($previous);
-            } while (null !== ($previous = $previous->getPrevious()));
-        }
-
         $event->setResponse(new JsonResponse($a));
     }
 
     private function formatException(Throwable $t): array
     {
         $a = [
-            'class'   => get_class($t),
             'message' => basename($t->getMessage()),
             'code'    => $t->getCode(),
         ];
 
-        if ('prod' !== $this->kernel->getEnvironment()) {
+        if ('dev' === $this->kernel->getEnvironment()) {
             $a += [
+                'class'   => get_class($t),
                 'message' => $t->getMessage(),
                 'file'    => $t->getFile(),
                 'line'    => $t->getLine(),
                 'trace'   => explode("\n", $t->getTraceAsString()),
             ];
+
+            if (null !== ($previous = $t->getPrevious())) {
+                do {
+                    $a['previous'] = $this->formatException($previous);
+                } while (null !== ($previous = $previous->getPrevious()));
+            }
         }
 
         return $a;

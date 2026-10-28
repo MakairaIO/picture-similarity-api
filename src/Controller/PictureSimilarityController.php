@@ -70,7 +70,9 @@ final readonly class PictureSimilarityController
                 ['updatedAt' => 'DESC'],
             );
 
-            $similarProducts[] = $similar->getSimilarIds();
+            if ($similar instanceof PictureSimilarity) {
+                $similarProducts[] = $similar->getSimilarIds();
+            }
         }
 
         if (empty($similarProducts)) {
