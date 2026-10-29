@@ -1,3 +1,10 @@
+## [1.4.4](https://github.com/MakairaIO/picture-similarity-api/compare/v1.4.3...v1.4.4) (2026-10-29)
+
+
+### Bug Fixes
+
+* Remove deduplication ([a7b0c0a](https://github.com/MakairaIO/picture-similarity-api/commit/a7b0c0a305bf54d0e98ec38c66c89c4f7b42f90f))
+
 ## [1.4.3](https://github.com/MakairaIO/picture-similarity-api/compare/v1.4.2...v1.4.3) (2026-10-28)
 
 
