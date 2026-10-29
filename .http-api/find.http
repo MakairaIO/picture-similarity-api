@@ -2,7 +2,7 @@
 # @no-cookie-jar
 # @no-log
 GET {{baseUri}}/api/{{shop}}/{{productId}}
-Authorization: Basic {{ auth.username }} {{ auth.password }}
+Authorization: Basic {{ auth_username }} {{ auth_password }}
 Host: {{host}}
 Cookie: XDEBUG_TRIGGER=42
 
@@ -10,7 +10,7 @@ Cookie: XDEBUG_TRIGGER=42
 # @no-cookie-jar
 # @no-log
 GET {{baseUri}}/api/image/{{shop}}/{{productId}}
-Authorization: Basic {{ auth.username }} {{ auth.password }}
+Authorization: Basic {{ auth_username }} {{ auth_password }}
 Host: {{host}}
 Cookie: XDEBUG_TRIGGER=42
 
@@ -18,7 +18,7 @@ Cookie: XDEBUG_TRIGGER=42
 # @no-cookie-jar
 # @no-log
 GET {{baseUri}}/api/{{shop}}/products/{{productIds}}
-Authorization: Basic {{ auth.username }} {{ auth.password }}
+Authorization: Basic {{ auth_username }} {{ auth_password }}
 Host: {{host}}
 Cookie: XDEBUG_TRIGGER=42
 
@@ -26,7 +26,7 @@ Cookie: XDEBUG_TRIGGER=42
 # @no-cookie-jar
 # @no-log
 GET {{baseUri}}/api/image/{{shop}}/products/{{productIds}}
-Authorization: Basic {{ auth.username }} {{ auth.password }}
+Authorization: Basic {{ auth_username }} {{ auth_password }}
 Host: {{host}}
 Cookie: XDEBUG_TRIGGER=42
 
@@ -34,6 +34,6 @@ Cookie: XDEBUG_TRIGGER=42
 # @no-cookie-jar
 # @no-log
 GET {{baseUri}}/api/{{shop}}/available-types
-Authorization: Basic {{ auth.username }} {{ auth.password }}
+Authorization: Basic {{ auth_username }} {{ auth_password }}
 Host: {{host}}
 Cookie: XDEBUG_TRIGGER=42

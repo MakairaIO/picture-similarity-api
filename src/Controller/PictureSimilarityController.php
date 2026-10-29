@@ -80,9 +80,8 @@ final readonly class PictureSimilarityController
         }
 
         $flatten = array_merge(...$similarProducts);
-        $unique = array_keys(array_flip($flatten));
 
-        return $this->json($unique);
+        return $this->json($flatten);
     }
 
     #[Route(path: '/{shop}/available-types', methods: ['GET'], priority: 30)]

@@ -28,12 +28,12 @@ class PictureSimilarityControllerTest extends WebTestCase
         yield 'Multiple products without type' => [
             '/testshop_test/products/1,2,3',
             200,
-            ["image", "type", "product", 1, 2, 3],
+            ["image", "type", "product", 1, "image", "type", "product", 2, "image", "type", "product", 3],
         ];
         yield 'Multiple products with type' => [
             '/notImage/testshop_test/products/1,2,3',
             200,
-            ["notImage", "type", "product", 1, 2, 3],
+            ["notImage", "type", "product", 1, "notImage", "type", "product", 2, "notImage", "type", "product", 3],
         ];
 
         yield 'Invalid product without type' => [
